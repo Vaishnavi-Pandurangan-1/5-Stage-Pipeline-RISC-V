@@ -1,0 +1,1389 @@
+(DELAYFILE
+(SDFVERSION "OVI 2.1")
+(DESIGN "msrv32_machine_control")
+// Mode: default  corner: default
+// setup active,  hold active
+(DATE "Thu Apr 24 10:55:07 2025")
+(PROGRAM "Synopsys icc2")
+(VERSION "T-2022.03-SP4")
+(DIVIDER /)
+(TIMESCALE 1ns)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE misaligned_exception_out_reg )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.29::1.29)(1.96::1.96))
+    (IOPATH (posedge CLK) Q (1.29::1.29)(1.96::1.96))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (-0.17::-0.17))
+    (HOLD (negedge D)  (posedge CLK) (0.01::0.01))
+    (SETUP (posedge D)  (posedge CLK) (1.52::1.52))
+    (SETUP (negedge D)  (posedge CLK) (0.48::0.48))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE curr_state_reg[0] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.34::1.34)(2.03::2.05))
+    (IOPATH (posedge CLK) Q (1.34::1.34)(2.03::2.05))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.09::0.09))
+    (HOLD (negedge D)  (posedge CLK) (0.18::0.18))
+    (SETUP (posedge D)  (posedge CLK) (1.17::1.17))
+    (SETUP (negedge D)  (posedge CLK) (0.31::0.31))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_RVT")
+  (INSTANCE curr_state_reg[1] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (0.27::0.27)(0.26::0.27))
+    (IOPATH (posedge CLK) Q (0.27::0.27)(0.26::0.27))
+    (IOPATH (posedge CLK) QN (0.24::0.24)(0.22::0.22))
+    (IOPATH (posedge CLK) QN (0.24::0.24)(0.22::0.22))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (-0.06::-0.06))
+    (HOLD (negedge D)  (posedge CLK) (-0.05::-0.05))
+    (SETUP (posedge D)  (posedge CLK) (0.14::0.14))
+    (SETUP (negedge D)  (posedge CLK) (0.18::0.18))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_RVT")
+  (INSTANCE curr_state_reg[2] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (0.26::0.26)(0.26::0.26))
+    (IOPATH (posedge CLK) Q (0.26::0.26)(0.26::0.26))
+    (IOPATH (posedge CLK) QN (0.24::0.24)(0.22::0.22))
+    (IOPATH (posedge CLK) QN (0.24::0.24)(0.22::0.22))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (-0.04::-0.04))
+    (HOLD (negedge D)  (posedge CLK) (-0.04::-0.04))
+    (SETUP (posedge D)  (posedge CLK) (0.11::0.11))
+    (SETUP (negedge D)  (posedge CLK) (0.12::0.12))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE curr_state_reg[3] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.30::1.30)(1.98::1.98))
+    (IOPATH (posedge CLK) Q (1.30::1.30)(1.98::1.98))
+    (IOPATH (posedge CLK) QN (1.62::1.66)(1.10::1.12))
+    (IOPATH (posedge CLK) QN (1.62::1.66)(1.10::1.12))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.07::0.07))
+    (HOLD (negedge D)  (posedge CLK) (0.15::0.15))
+    (SETUP (posedge D)  (posedge CLK) (1.22::1.22))
+    (SETUP (negedge D)  (posedge CLK) (0.35::0.35))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE i_or_e_out_reg )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.36::1.36)(2.06::2.06))
+    (IOPATH (posedge CLK) Q (1.36::1.36)(2.06::2.06))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.06::0.06))
+    (HOLD (negedge D)  (posedge CLK) (0.15::0.15))
+    (SETUP (posedge D)  (posedge CLK) (1.24::1.24))
+    (SETUP (negedge D)  (posedge CLK) (0.36::0.36))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE cause_out_reg[0] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.32::1.33)(2.01::2.02))
+    (IOPATH (posedge CLK) Q (1.32::1.33)(2.01::2.02))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.06::0.06))
+    (HOLD (negedge D)  (posedge CLK) (0.15::0.15))
+    (SETUP (posedge D)  (posedge CLK) (1.24::1.24))
+    (SETUP (negedge D)  (posedge CLK) (0.36::0.36))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE cause_out_reg[2] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.34::1.34)(2.03::2.04))
+    (IOPATH (posedge CLK) Q (1.34::1.34)(2.03::2.04))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.05::0.05))
+    (HOLD (negedge D)  (posedge CLK) (0.14::0.14))
+    (SETUP (posedge D)  (posedge CLK) (1.39::1.39))
+    (SETUP (negedge D)  (posedge CLK) (0.38::0.38))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE cause_out_reg[1] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.35::1.36)(2.05::2.06))
+    (IOPATH (posedge CLK) Q (1.35::1.36)(2.05::2.06))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.05::0.05))
+    (HOLD (negedge D)  (posedge CLK) (0.14::0.14))
+    (SETUP (posedge D)  (posedge CLK) (1.24::1.24))
+    (SETUP (negedge D)  (posedge CLK) (0.37::0.37))
+  )
+
+)
+(CELL
+  (CELLTYPE "DFFX1_HVT")
+  (INSTANCE cause_out_reg[3] )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH (posedge CLK) Q (1.34::1.35)(2.04::2.04))
+    (IOPATH (posedge CLK) Q (1.34::1.35)(2.04::2.04))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    (IOPATH (posedge CLK) QN (1.31::1.31)(0.94::0.94))
+    )
+  )
+  (TIMINGCHECK
+    (HOLD (posedge D)  (posedge CLK) (0.05::0.05))
+    (HOLD (negedge D)  (posedge CLK) (0.13::0.13))
+    (SETUP (posedge D)  (posedge CLK) (1.24::1.24))
+    (SETUP (negedge D)  (posedge CLK) (0.39::0.39))
+  )
+
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U76 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.35::0.37)(0.37::0.39))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X1_HVT")
+  (INSTANCE U79 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.02::1.04)(2.05::2.06))
+    (IOPATH A1 Y (1.02::1.04)(2.05::2.06))
+    (IOPATH A2 Y (1.13::1.15)(2.55::2.57))
+    (IOPATH A2 Y (1.13::1.15)(2.55::2.57))
+    (IOPATH A3 Y (0.92::0.92)(2.31::2.32))
+    (IOPATH A3 Y (0.92::0.92)(2.31::2.32))
+    (IOPATH A4 Y (0.95::0.96)(2.34::2.35))
+    (IOPATH A4 Y (0.95::0.96)(2.34::2.35))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND3X0_RVT")
+  (INSTANCE U80 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.17::0.19)(0.17::0.19))
+    (IOPATH A1 Y (0.17::0.19)(0.17::0.19))
+    (IOPATH A2 Y (0.18::0.19)(0.21::0.22))
+    (IOPATH A2 Y (0.18::0.19)(0.21::0.22))
+    (IOPATH A3 Y (0.27::0.27)(0.22::0.23))
+    (IOPATH A3 Y (0.27::0.27)(0.22::0.23))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U81 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.15::0.18)(0.18::0.24))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR2X1_HVT")
+  (INSTANCE U84 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.47::0.49)(0.36::0.37))
+    (IOPATH A1 Y (0.47::0.49)(0.36::0.37))
+    (IOPATH A2 Y (0.41::0.42)(0.35::0.36))
+    (IOPATH A2 Y (0.41::0.42)(0.35::0.36))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U85 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.20::0.22)(0.29::0.33))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR2X1_HVT")
+  (INSTANCE U86 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.50::0.51)(0.38::0.40))
+    (IOPATH A1 Y (0.50::0.51)(0.38::0.40))
+    (IOPATH A2 Y (0.44::0.44)(0.37::0.39))
+    (IOPATH A2 Y (0.44::0.44)(0.37::0.39))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U87 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.26::0.28)(0.36::0.40))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1_HVT")
+  (INSTANCE U88 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.63::0.64)(0.26::0.27))
+    (IOPATH A1 Y (0.63::0.64)(0.26::0.27))
+    (IOPATH A2 Y (0.63::0.64)(0.28::0.29))
+    (IOPATH A2 Y (0.63::0.64)(0.28::0.29))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1_HVT")
+  (INSTANCE U91 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.63::0.64)(0.26::0.27))
+    (IOPATH A1 Y (0.63::0.64)(0.26::0.27))
+    (IOPATH A2 Y (0.63::0.64)(0.28::0.29))
+    (IOPATH A2 Y (0.63::0.64)(0.28::0.29))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR2X1_HVT")
+  (INSTANCE U92 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.46::0.46)(0.35::0.35))
+    (IOPATH A1 Y (0.46::0.46)(0.35::0.35))
+    (IOPATH A2 Y (0.40::0.40)(0.34::0.34))
+    (IOPATH A2 Y (0.40::0.40)(0.34::0.34))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR2X1_HVT")
+  (INSTANCE U95 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.44::0.45)(0.33::0.34))
+    (IOPATH A1 Y (0.44::0.45)(0.33::0.34))
+    (IOPATH A2 Y (0.38::0.39)(0.32::0.33))
+    (IOPATH A2 Y (0.38::0.39)(0.32::0.33))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND3X0_RVT")
+  (INSTANCE U96 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.07::0.07)(0.11::0.12))
+    (IOPATH A1 Y (0.07::0.07)(0.11::0.12))
+    (IOPATH A2 Y (0.07::0.08)(0.12::0.12))
+    (IOPATH A2 Y (0.07::0.08)(0.12::0.12))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND4X1_HVT")
+  (INSTANCE U97 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.61::1.65)(0.63::0.66))
+    (IOPATH A1 Y (1.61::1.65)(0.63::0.66))
+    (IOPATH A2 Y (1.82::1.87)(0.73::0.77))
+    (IOPATH A2 Y (1.82::1.87)(0.73::0.77))
+    (IOPATH A3 Y (1.98::2.03)(0.74::0.77))
+    (IOPATH A3 Y (1.98::2.03)(0.74::0.77))
+    (IOPATH A4 Y (1.93::2.01)(0.69::0.73))
+    (IOPATH A4 Y (1.93::2.01)(0.69::0.73))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR3X0_HVT")
+  (INSTANCE U98 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.75::0.76)(1.01::1.02))
+    (IOPATH A1 Y (0.75::0.76)(1.01::1.02))
+    (IOPATH A2 Y (0.74::0.75)(0.92::0.93))
+    (IOPATH A2 Y (0.74::0.75)(0.92::0.93))
+    (IOPATH A3 Y (0.69::0.70)(0.81::0.82))
+    (IOPATH A3 Y (0.69::0.70)(0.81::0.82))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U99 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.02::1.02)(1.57::1.58))
+    (IOPATH A1 Y (1.02::1.02)(1.57::1.58))
+    (IOPATH A2 Y (1.00::1.00)(1.45::1.45))
+    (IOPATH A2 Y (1.00::1.00)(1.45::1.45))
+    (IOPATH A3 Y (0.95::0.95)(1.31::1.31))
+    (IOPATH A3 Y (0.95::0.95)(1.31::1.31))
+    (IOPATH A4 Y (0.85::0.85)(1.14::1.14))
+    (IOPATH A4 Y (0.85::0.85)(1.14::1.14))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U100 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.99::0.99)(1.53::1.53))
+    (IOPATH A1 Y (0.99::0.99)(1.53::1.53))
+    (IOPATH A2 Y (0.97::0.97)(1.40::1.41))
+    (IOPATH A2 Y (0.97::0.97)(1.40::1.41))
+    (IOPATH A3 Y (0.92::0.92)(1.27::1.27))
+    (IOPATH A3 Y (0.92::0.92)(1.27::1.27))
+    (IOPATH A4 Y (0.82::0.82)(1.10::1.10))
+    (IOPATH A4 Y (0.82::0.82)(1.10::1.10))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U101 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.98::0.98)(1.52::1.52))
+    (IOPATH A1 Y (0.98::0.98)(1.52::1.52))
+    (IOPATH A2 Y (0.96::0.97)(1.40::1.40))
+    (IOPATH A2 Y (0.96::0.97)(1.40::1.40))
+    (IOPATH A3 Y (0.91::0.91)(1.26::1.26))
+    (IOPATH A3 Y (0.91::0.91)(1.26::1.26))
+    (IOPATH A4 Y (0.82::0.82)(1.09::1.09))
+    (IOPATH A4 Y (0.82::0.82)(1.09::1.09))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U102 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.00::1.01)(1.55::1.56))
+    (IOPATH A1 Y (1.00::1.01)(1.55::1.56))
+    (IOPATH A2 Y (0.99::0.99)(1.43::1.43))
+    (IOPATH A2 Y (0.99::0.99)(1.43::1.43))
+    (IOPATH A3 Y (0.93::0.94)(1.29::1.29))
+    (IOPATH A3 Y (0.93::0.94)(1.29::1.29))
+    (IOPATH A4 Y (0.84::0.84)(1.12::1.12))
+    (IOPATH A4 Y (0.84::0.84)(1.12::1.12))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U103 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.02::1.02)(1.57::1.57))
+    (IOPATH A1 Y (1.02::1.02)(1.57::1.57))
+    (IOPATH A2 Y (1.00::1.00)(1.44::1.44))
+    (IOPATH A2 Y (1.00::1.00)(1.44::1.44))
+    (IOPATH A3 Y (0.95::0.95)(1.30::1.31))
+    (IOPATH A3 Y (0.95::0.95)(1.30::1.31))
+    (IOPATH A4 Y (0.85::0.85)(1.13::1.13))
+    (IOPATH A4 Y (0.85::0.85)(1.13::1.13))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND4X1_HVT")
+  (INSTANCE U104 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.67::1.67)(0.70::0.76))
+    (IOPATH A1 Y (1.67::1.67)(0.70::0.76))
+    (IOPATH A2 Y (1.87::1.88)(0.73::0.78))
+    (IOPATH A2 Y (1.87::1.88)(0.73::0.78))
+    (IOPATH A3 Y (2.01::2.02)(0.78::0.83))
+    (IOPATH A3 Y (2.01::2.02)(0.78::0.83))
+    (IOPATH A4 Y (2.07::2.08)(0.82::0.87))
+    (IOPATH A4 Y (2.07::2.08)(0.82::0.87))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND4X1_HVT")
+  (INSTANCE U105 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.59::1.60)(0.49::0.50))
+    (IOPATH A1 Y (1.59::1.60)(0.49::0.50))
+    (IOPATH A2 Y (1.76::1.78)(0.53::0.53))
+    (IOPATH A2 Y (1.76::1.78)(0.53::0.53))
+    (IOPATH A3 Y (2.00::2.02)(0.79::0.84))
+    (IOPATH A3 Y (2.00::2.02)(0.79::0.84))
+    (IOPATH A4 Y (2.41::2.43)(0.79::0.83))
+    (IOPATH A4 Y (2.41::2.43)(0.79::0.83))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR4X1_HVT")
+  (INSTANCE U107 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.01::1.02)(1.56::1.58))
+    (IOPATH A1 Y (1.01::1.02)(1.56::1.58))
+    (IOPATH A2 Y (0.99::1.00)(1.44::1.46))
+    (IOPATH A2 Y (0.99::1.00)(1.44::1.46))
+    (IOPATH A3 Y (0.94::0.95)(1.30::1.32))
+    (IOPATH A3 Y (0.94::0.95)(1.30::1.32))
+    (IOPATH A4 Y (0.88::0.93)(1.19::1.29))
+    (IOPATH A4 Y (0.88::0.93)(1.19::1.29))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U108 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.27::0.33)(0.31::0.33))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND3X0_RVT")
+  (INSTANCE U112 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.19::0.21)(0.15::0.17))
+    (IOPATH A1 Y (0.19::0.21)(0.15::0.17))
+    (IOPATH A2 Y (0.33::0.38)(0.19::0.23))
+    (IOPATH A2 Y (0.33::0.38)(0.19::0.23))
+    (IOPATH A3 Y (0.14::0.24)(0.14::0.21))
+    (IOPATH A3 Y (0.14::0.24)(0.14::0.21))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR3X0_RVT")
+  (INSTANCE U113 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.19::0.19)(0.15::0.16))
+    (IOPATH A1 Y (0.19::0.19)(0.15::0.16))
+    (IOPATH A2 Y (0.18::0.19)(0.14::0.15))
+    (IOPATH A2 Y (0.18::0.19)(0.14::0.15))
+    (IOPATH A3 Y (0.21::0.24)(0.19::0.28))
+    (IOPATH A3 Y (0.21::0.24)(0.19::0.28))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X1_HVT")
+  (INSTANCE U114 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.79::0.87)(1.09::1.11))
+    (IOPATH A1 Y (0.79::0.87)(1.09::1.11))
+    (IOPATH A2 Y (0.63::0.65)(1.01::1.04))
+    (IOPATH A2 Y (0.63::0.65)(1.01::1.04))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OAI21X1_RVT")
+  (INSTANCE U117 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.22::0.23)(0.20::0.20))
+    (IOPATH A1 Y (0.22::0.23)(0.20::0.20))
+    (IOPATH A2 Y (0.36::0.38)(0.28::0.29))
+    (IOPATH A2 Y (0.36::0.38)(0.28::0.29))
+    (IOPATH A3 Y (0.23::0.28)(0.24::0.30))
+    (IOPATH A3 Y (0.23::0.28)(0.24::0.30))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_RVT")
+  (INSTANCE U118 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.09::0.11)(0.08::0.09))
+    (IOPATH A1 Y (0.09::0.11)(0.08::0.09))
+    (IOPATH A2 Y (0.23::0.26)(0.13::0.16))
+    (IOPATH A2 Y (0.23::0.26)(0.13::0.16))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X1_HVT")
+  (INSTANCE U120 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.97::1.01)(2.08::2.10))
+    (IOPATH A1 Y (0.97::1.01)(2.08::2.10))
+    (IOPATH A2 Y (1.29::1.39)(2.29::2.34))
+    (IOPATH A2 Y (1.29::1.39)(2.29::2.34))
+    (IOPATH A3 Y (0.90::0.93)(2.29::2.32))
+    (IOPATH A3 Y (0.90::0.93)(2.29::2.32))
+    (IOPATH A4 Y (1.18::1.22)(2.44::2.49))
+    (IOPATH A4 Y (1.18::1.22)(2.44::2.49))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OA21X1_RVT")
+  (INSTANCE U121 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.20::0.21)(0.31::0.33))
+    (IOPATH A1 Y (0.20::0.21)(0.31::0.33))
+    (IOPATH A2 Y (0.16::0.20)(0.17::0.19))
+    (IOPATH A2 Y (0.16::0.20)(0.17::0.19))
+    (IOPATH A3 Y (0.21::0.22)(0.30::0.31))
+    (IOPATH A3 Y (0.21::0.22)(0.30::0.31))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OA221X1_RVT")
+  (INSTANCE U122 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.21::0.22)(0.34::0.37))
+    (IOPATH A1 Y (0.21::0.22)(0.34::0.37))
+    (IOPATH A2 Y (0.24::0.25)(0.36::0.38))
+    (IOPATH A2 Y (0.24::0.25)(0.36::0.38))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    (IOPATH A4 Y (0.18::0.20)(0.22::0.24))
+    (IOPATH A4 Y (0.18::0.20)(0.22::0.24))
+    (IOPATH A5 Y (0.19::0.20)(0.42::0.46))
+    (IOPATH A5 Y (0.19::0.20)(0.42::0.46))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U123 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.16::0.23)(0.22::0.45))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_RVT")
+  (INSTANCE U124 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.21::0.26)(0.09::0.11))
+    (IOPATH A1 Y (0.21::0.26)(0.09::0.11))
+    (IOPATH A2 Y (0.20::0.22)(0.14::0.16))
+    (IOPATH A2 Y (0.20::0.22)(0.14::0.16))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X0_RVT")
+  (INSTANCE U125 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.13::0.17)(0.17::0.20))
+    (IOPATH A1 Y (0.13::0.17)(0.17::0.20))
+    (IOPATH A2 Y (0.14::0.20)(0.18::0.22))
+    (IOPATH A2 Y (0.14::0.20)(0.18::0.22))
+    (IOPATH A3 Y (0.16::0.20)(0.22::0.27))
+    (IOPATH A3 Y (0.16::0.20)(0.22::0.27))
+    (IOPATH A4 Y (0.30::0.33)(0.27::0.30))
+    (IOPATH A4 Y (0.30::0.33)(0.27::0.30))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_RVT")
+  (INSTANCE U126 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.20::0.24)(0.13::0.18))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "MUX21X1_RVT")
+  (INSTANCE U127 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.16::0.16)(0.19::0.19))
+    (IOPATH A2 Y (0.22::0.22)(0.30::0.31))
+    (IOPATH (posedge S0) Y (0.21::0.22)(0.27::0.29))
+    (IOPATH (negedge S0) Y (0.19::0.21)(0.24::0.28))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_HVT")
+  (INSTANCE U128 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.36::0.37)(0.51::0.52))
+    (IOPATH A1 Y (0.36::0.37)(0.51::0.52))
+    (IOPATH A2 Y (0.21::0.24)(0.46::0.52))
+    (IOPATH A2 Y (0.21::0.24)(0.46::0.52))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_HVT")
+  (INSTANCE U129 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.37::0.38)(0.56::0.57))
+    (IOPATH A1 Y (0.37::0.38)(0.56::0.57))
+    (IOPATH A2 Y (0.22::0.25)(0.52::0.58))
+    (IOPATH A2 Y (0.22::0.25)(0.52::0.58))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND3X0_RVT")
+  (INSTANCE U132 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.04::0.04)(0.06::0.07))
+    (IOPATH A1 Y (0.04::0.04)(0.06::0.07))
+    (IOPATH A2 Y (0.04::0.04)(0.07::0.07))
+    (IOPATH A2 Y (0.04::0.04)(0.07::0.07))
+    (IOPATH A3 Y (0.04::0.04)(0.07::0.08))
+    (IOPATH A3 Y (0.04::0.04)(0.07::0.08))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OA221X1_RVT")
+  (INSTANCE U134 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.19::0.20)(0.24::0.26))
+    (IOPATH A1 Y (0.19::0.20)(0.24::0.26))
+    (IOPATH A2 Y (0.20::0.22)(0.31::0.33))
+    (IOPATH A2 Y (0.20::0.22)(0.31::0.33))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    (IOPATH A3 Y (0.18::0.19)(0.21::0.23))
+    (IOPATH A4 Y (0.26::0.29)(0.28::0.30))
+    (IOPATH A4 Y (0.26::0.29)(0.28::0.30))
+    (IOPATH A5 Y (0.19::0.20)(0.41::0.46))
+    (IOPATH A5 Y (0.19::0.20)(0.41::0.46))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR2X0_RVT")
+  (INSTANCE U135 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.20::0.23)(0.19::0.26))
+    (IOPATH A1 Y (0.20::0.23)(0.19::0.26))
+    (IOPATH A2 Y (0.23::0.24)(0.17::0.18))
+    (IOPATH A2 Y (0.23::0.24)(0.17::0.18))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR3X0_RVT")
+  (INSTANCE U136 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.25::0.29)(0.23::0.31))
+    (IOPATH A1 Y (0.25::0.29)(0.23::0.31))
+    (IOPATH A2 Y (0.21::0.22)(0.17::0.17))
+    (IOPATH A2 Y (0.21::0.22)(0.17::0.17))
+    (IOPATH A3 Y (0.25::0.26)(0.28::0.31))
+    (IOPATH A3 Y (0.25::0.26)(0.28::0.31))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_HVT")
+  (INSTANCE U137 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.18::0.23)(0.47::0.52))
+    (IOPATH A1 Y (0.18::0.23)(0.47::0.52))
+    (IOPATH A2 Y (0.35::0.36)(0.58::0.61))
+    (IOPATH A2 Y (0.35::0.36)(0.58::0.61))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_RVT")
+  (INSTANCE U138 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.09::0.11)(0.07::0.08))
+    (IOPATH A1 Y (0.09::0.11)(0.07::0.08))
+    (IOPATH A2 Y (0.29::0.31)(0.10::0.13))
+    (IOPATH A2 Y (0.29::0.31)(0.10::0.13))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OA221X1_RVT")
+  (INSTANCE U139 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.16::0.17)(0.20::0.21))
+    (IOPATH A1 Y (0.16::0.17)(0.20::0.21))
+    (IOPATH A2 Y (0.19::0.20)(0.22::0.24))
+    (IOPATH A2 Y (0.19::0.20)(0.22::0.24))
+    (IOPATH A3 Y (0.16::0.16)(0.17::0.18))
+    (IOPATH A3 Y (0.16::0.16)(0.17::0.18))
+    (IOPATH A4 Y (0.23::0.24)(0.33::0.35))
+    (IOPATH A4 Y (0.23::0.24)(0.33::0.35))
+    (IOPATH A5 Y (0.20::0.21)(0.31::0.33))
+    (IOPATH A5 Y (0.20::0.21)(0.31::0.33))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_RVT")
+  (INSTANCE U140 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.11::0.15)(0.08::0.10))
+    (IOPATH A1 Y (0.11::0.15)(0.08::0.10))
+    (IOPATH A2 Y (0.26::0.29)(0.16::0.18))
+    (IOPATH A2 Y (0.26::0.29)(0.16::0.18))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U141 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.11::0.15)(0.18::0.26))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AO22X1_RVT")
+  (INSTANCE U142 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.13::0.14)(0.12::0.13))
+    (IOPATH A1 Y (0.13::0.14)(0.12::0.13))
+    (IOPATH A2 Y (0.18::0.19)(0.25::0.27))
+    (IOPATH A2 Y (0.18::0.19)(0.25::0.27))
+    (IOPATH A3 Y (0.11::0.11)(0.09::0.09))
+    (IOPATH A3 Y (0.11::0.11)(0.09::0.09))
+    (IOPATH A4 Y (0.17::0.19)(0.22::0.24))
+    (IOPATH A4 Y (0.17::0.19)(0.22::0.24))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AO221X1_RVT")
+  (INSTANCE U143 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.20::0.25)(0.24::0.28))
+    (IOPATH A1 Y (0.20::0.25)(0.24::0.28))
+    (IOPATH A2 Y (0.23::0.28)(0.32::0.35))
+    (IOPATH A2 Y (0.23::0.28)(0.32::0.35))
+    (IOPATH A3 Y (0.20::0.22)(0.22::0.26))
+    (IOPATH A3 Y (0.20::0.22)(0.22::0.26))
+    (IOPATH A4 Y (0.25::0.25)(0.36::0.37))
+    (IOPATH A4 Y (0.25::0.25)(0.36::0.37))
+    (IOPATH A5 Y (0.15::0.16)(0.13::0.15))
+    (IOPATH A5 Y (0.15::0.16)(0.13::0.15))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AO22X1_RVT")
+  (INSTANCE U144 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.18::0.20)(0.19::0.23))
+    (IOPATH A1 Y (0.18::0.20)(0.19::0.23))
+    (IOPATH A2 Y (0.22::0.22)(0.31::0.32))
+    (IOPATH A2 Y (0.22::0.22)(0.31::0.32))
+    (IOPATH A3 Y (0.15::0.18)(0.17::0.19))
+    (IOPATH A3 Y (0.15::0.18)(0.17::0.19))
+    (IOPATH A4 Y (0.15::0.19)(0.13::0.16))
+    (IOPATH A4 Y (0.15::0.19)(0.13::0.16))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U145 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.10::0.14)(0.15::0.18))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AO22X1_RVT")
+  (INSTANCE U146 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.18::0.20)(0.19::0.23))
+    (IOPATH A1 Y (0.18::0.20)(0.19::0.23))
+    (IOPATH A2 Y (0.23::0.23)(0.34::0.34))
+    (IOPATH A2 Y (0.23::0.23)(0.34::0.34))
+    (IOPATH A3 Y (0.15::0.18)(0.17::0.19))
+    (IOPATH A3 Y (0.15::0.18)(0.17::0.19))
+    (IOPATH A4 Y (0.14::0.15)(0.17::0.18))
+    (IOPATH A4 Y (0.14::0.15)(0.17::0.18))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X1_RVT")
+  (INSTANCE U109 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.29::0.32)(0.24::0.24))
+    (IOPATH A1 Y (0.29::0.32)(0.24::0.24))
+    (IOPATH A2 Y (0.30::0.32)(0.21::0.22))
+    (IOPATH A2 Y (0.30::0.32)(0.21::0.22))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND2X0_RVT")
+  (INSTANCE U116 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.23::0.27)(0.11::0.13))
+    (IOPATH A1 Y (0.23::0.27)(0.11::0.13))
+    (IOPATH A2 Y (0.42::0.49)(0.19::0.21))
+    (IOPATH A2 Y (0.42::0.49)(0.19::0.21))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR3X1_HVT")
+  (INSTANCE U133 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.82::0.85)(0.58::0.60))
+    (IOPATH A1 Y (0.82::0.85)(0.58::0.60))
+    (IOPATH A2 Y (0.80::0.91)(0.63::0.73))
+    (IOPATH A2 Y (0.80::0.91)(0.63::0.73))
+    (IOPATH A3 Y (0.68::0.71)(0.54::0.56))
+    (IOPATH A3 Y (0.68::0.71)(0.54::0.56))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND3X0_RVT")
+  (INSTANCE U106 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.05::0.06)(0.09::0.10))
+    (IOPATH A1 Y (0.05::0.06)(0.09::0.10))
+    (IOPATH A2 Y (0.19::0.21)(0.17::0.19))
+    (IOPATH A2 Y (0.19::0.21)(0.17::0.19))
+    (IOPATH A3 Y (0.21::0.24)(0.26::0.28))
+    (IOPATH A3 Y (0.21::0.24)(0.26::0.28))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X1_HVT")
+  (INSTANCE U77 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (1.02::1.03)(2.09::2.10))
+    (IOPATH A1 Y (1.02::1.03)(2.09::2.10))
+    (IOPATH A2 Y (0.91::0.92)(2.24::2.26))
+    (IOPATH A2 Y (0.91::0.92)(2.24::2.26))
+    (IOPATH A3 Y (1.18::1.22)(2.45::2.48))
+    (IOPATH A3 Y (1.18::1.22)(2.45::2.48))
+    (IOPATH A4 Y (0.99::1.00)(2.39::2.40))
+    (IOPATH A4 Y (0.99::1.00)(2.39::2.40))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X1_HVT")
+  (INSTANCE U78 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.82::0.82)(2.04::2.05))
+    (IOPATH A1 Y (0.82::0.82)(2.04::2.05))
+    (IOPATH A2 Y (1.16::1.18)(2.59::2.61))
+    (IOPATH A2 Y (1.16::1.18)(2.59::2.61))
+    (IOPATH A3 Y (1.17::1.21)(2.44::2.47))
+    (IOPATH A3 Y (1.17::1.21)(2.44::2.47))
+    (IOPATH A4 Y (0.98::0.99)(2.38::2.39))
+    (IOPATH A4 Y (0.98::0.99)(2.38::2.39))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NAND4X0_RVT")
+  (INSTANCE U111 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.09::0.10)(0.11::0.13))
+    (IOPATH A1 Y (0.09::0.10)(0.11::0.13))
+    (IOPATH A2 Y (0.28::0.31)(0.25::0.27))
+    (IOPATH A2 Y (0.28::0.31)(0.25::0.27))
+    (IOPATH A3 Y (0.28::0.31)(0.21::0.22))
+    (IOPATH A3 Y (0.28::0.31)(0.21::0.22))
+    (IOPATH A4 Y (0.13::0.14)(0.16::0.17))
+    (IOPATH A4 Y (0.13::0.14)(0.16::0.17))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NOR2X0_HVT")
+  (INSTANCE U94 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.80::0.84)(1.00::1.02))
+    (IOPATH A1 Y (0.80::0.84)(1.00::1.02))
+    (IOPATH A2 Y (0.71::0.74)(0.92::0.94))
+    (IOPATH A2 Y (0.71::0.74)(0.92::0.94))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1_HVT")
+  (INSTANCE U93 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.85::0.86)(0.45::0.48))
+    (IOPATH A1 Y (0.85::0.86)(0.45::0.48))
+    (IOPATH A2 Y (0.91::0.95)(0.49::0.51))
+    (IOPATH A2 Y (0.91::0.95)(0.49::0.51))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OA21X1_HVT")
+  (INSTANCE U130 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.99::1.00)(0.44::0.45))
+    (IOPATH A1 Y (0.99::1.00)(0.44::0.45))
+    (IOPATH A2 Y (1.10::1.14)(0.55::0.57))
+    (IOPATH A2 Y (1.10::1.14)(0.55::0.57))
+    (IOPATH A3 Y (0.98::1.02)(0.83::0.92))
+    (IOPATH A3 Y (0.98::1.02)(0.83::0.92))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U82 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.16::0.19)(0.31::0.36))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U83 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.31::0.35)(0.46::0.48))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U110 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.11::0.15)(0.18::0.21))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U115 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.18::0.19)(0.29::0.30))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U119 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.17::0.18)(0.27::0.27))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "INVX0_HVT")
+  (INSTANCE U131 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.12::0.15)(0.20::0.23))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "OR2X1_HVT")
+  (INSTANCE U89 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.43::0.44)(0.33::0.33))
+    (IOPATH A1 Y (0.43::0.44)(0.33::0.33))
+    (IOPATH A2 Y (0.38::0.38)(0.32::0.32))
+    (IOPATH A2 Y (0.38::0.38)(0.32::0.32))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1_HVT")
+  (INSTANCE U90 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A1 Y (0.86::0.87)(0.46::0.49))
+    (IOPATH A1 Y (0.86::0.87)(0.46::0.49))
+    (IOPATH A2 Y (0.91::0.94)(0.48::0.49))
+    (IOPATH A2 Y (0.91::0.94)(0.48::0.49))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NBUFFX2_HVT")
+  (INSTANCE U147 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.57::0.60)(0.53::0.54))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NBUFFX4_HVT")
+  (INSTANCE U148 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.17::0.28)(0.20::0.31))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "NBUFFX2_HVT")
+  (INSTANCE U149 )
+  (DELAY
+    (ABSOLUTE
+    (IOPATH A Y (0.58::0.60)(0.53::0.56))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "msrv32_machine_control")
+  (INSTANCE)
+  (DELAY
+    (ABSOLUTE
+    (INTERCONNECT clk_in cause_out_reg[3]/CLK (0.00::0.00))
+    (INTERCONNECT clk_in cause_out_reg[1]/CLK (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT clk_in cause_out_reg[2]/CLK (0.00::0.00))
+    (INTERCONNECT clk_in cause_out_reg[0]/CLK (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT clk_in i_or_e_out_reg/CLK (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT clk_in curr_state_reg[3]/CLK (0.00::0.00))
+    (INTERCONNECT clk_in curr_state_reg[2]/CLK (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT clk_in curr_state_reg[1]/CLK (0.00::0.00))
+    (INTERCONNECT clk_in curr_state_reg[0]/CLK (0.00::0.00))
+    (INTERCONNECT clk_in misaligned_exception_out_reg/CLK (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT reset_in U82/A (0.00::0.00))
+    (INTERCONNECT reset_in U139/A3 (0.00::0.00))
+    (INTERCONNECT reset_in U139/A1 (0.00::0.00))
+    (INTERCONNECT reset_in curr_state_reg[0]/D (0.00::0.00))
+    (INTERCONNECT illegal_instr_in U142/A3 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT illegal_instr_in U113/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT illegal_instr_in U84/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT misaligned_load_in U86/A1 (0.00::0.00))
+    (INTERCONNECT misaligned_store_in U142/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT misaligned_store_in U86/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT misaligned_instr_in U130/A1 (0.00::0.00))
+    (INTERCONNECT misaligned_instr_in U113/A1 (0.00::0.00))
+    (INTERCONNECT misaligned_instr_in U84/A1 (0.00::0.00))
+    (INTERCONNECT opcode_6_to_2_in[6] U105/A1 (0.00::0.00))
+    (INTERCONNECT opcode_6_to_2_in[5] U106/A1 (0.00::0.00))
+    (INTERCONNECT opcode_6_to_2_in[4] U105/A2 (0.00::0.00))
+    (INTERCONNECT opcode_6_to_2_in[3] U102/A4 (0.00::0.00))
+    (INTERCONNECT opcode_6_to_2_in[2] U102/A1 (0.00::0.00))
+    (INTERCONNECT funct3_in[2] U103/A1 (0.00::0.00))
+    (INTERCONNECT funct3_in[1] U102/A3 (0.00::0.00))
+    (INTERCONNECT funct3_in[0] U103/A4 (0.00::0.00))
+    (INTERCONNECT funct7_in[6] U100/A1 (0.00::0.00))
+    (INTERCONNECT funct7_in[5] U101/A4 (0.00::0.00))
+    (INTERCONNECT funct7_in[4] U132/A2 (0.00::0.00))
+    (INTERCONNECT funct7_in[4] U107/A1 (0.00::0.00))
+    (INTERCONNECT funct7_in[3] U132/A3 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT funct7_in[3] U107/A3 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT funct7_in[2] U100/A2 (0.00::0.00))
+    (INTERCONNECT funct7_in[1] U98/A3 (0.00::0.00))
+    (INTERCONNECT funct7_in[0] U98/A1 (0.00::0.00))
+    (INTERCONNECT rs1_addr_in[4] U101/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT rs1_addr_in[3] U101/A3 (0.00::0.00))
+    (INTERCONNECT rs1_addr_in[2] U98/A2 (0.00::0.00))
+    (INTERCONNECT rs1_addr_in[1] U101/A1 (0.00::0.00))
+    (INTERCONNECT rs1_addr_in[0] U102/A2 (0.00::0.00))
+    (INTERCONNECT rs2_addr_in[4] U99/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT rs2_addr_in[3] U99/A3 (0.00::0.00))
+    (INTERCONNECT rs2_addr_in[2] U99/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT rs2_addr_in[1] U132/A1 (0.00::0.00))
+    (INTERCONNECT rs2_addr_in[1] U107/A2 (0.00::0.00))
+    (INTERCONNECT rs2_addr_in[0] U133/A1 (0.00::0.00))
+    (INTERCONNECT rs2_addr_in[0] U117/A1 (0.00::0.00))
+    (INTERCONNECT rd_addr_in[4] U100/A3 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT rd_addr_in[3] U100/A4 (0.00::0.00))
+    (INTERCONNECT rd_addr_in[2] U103/A3 (0.00::0.00))
+    (INTERCONNECT rd_addr_in[1] U103/A2 (0.00::0.00))
+    (INTERCONNECT rd_addr_in[0] U99/A4 (0.00::0.00))
+    (INTERCONNECT e_irq_in U95/A1 (0.00::0.00))
+    (INTERCONNECT t_irq_in U92/A1 (0.00::0.00))
+    (INTERCONNECT s_irq_in U89/A2 (0.00::0.00))
+    (INTERCONNECT mie_in U96/A2 (0.00::0.00))
+    (INTERCONNECT mie_in U91/A2 (0.00::0.00))
+    (INTERCONNECT mie_in U88/A1 (0.00::0.00))
+    (INTERCONNECT meie_in U96/A1 (0.00::0.00))
+    (INTERCONNECT mtie_in U91/A1 (0.00::0.00))
+    (INTERCONNECT msie_in U88/A2 (0.00::0.00))
+    (INTERCONNECT meip_in U95/A2 (0.00::0.00))
+    (INTERCONNECT mtip_in U92/A2 (0.00::0.00))
+    (INTERCONNECT msip_in U89/A1 (0.00::0.00))
+    (INTERCONNECT misaligned_exception_out_reg/Q misaligned_exception_out (0.00::0.00))
+    (INTERCONNECT curr_state_reg[0]/Q U79/A1 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[0]/Q U76/A (0.00::0.00))
+    (INTERCONNECT curr_state_reg[1]/Q U111/A1 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[1]/QN U78/A4 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[1]/QN U77/A4 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[1]/QN U79/A4 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[2]/Q U78/A1 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[2]/QN U111/A4 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[2]/QN U77/A2 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[2]/QN U79/A3 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[3]/Q U77/A1 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[3]/QN U111/A2 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[3]/QN U78/A2 (0.00::0.00))
+    (INTERCONNECT curr_state_reg[3]/QN U79/A2 (0.00::0.00))
+    (INTERCONNECT i_or_e_out_reg/Q U146/A2 (0.00::0.00))
+    (INTERCONNECT i_or_e_out_reg/Q i_or_e_out (0.00::0.00))
+    (INTERCONNECT cause_out_reg[0]/Q U144/A2 (0.00::0.00))
+    (INTERCONNECT cause_out_reg[0]/Q cause_out[0] (0.00::0.00))
+    (INTERCONNECT cause_out_reg[2]/Q U137/A2 (0.00::0.00))
+    (INTERCONNECT cause_out_reg[2]/Q cause_out[2] (0.00::0.00))
+    (INTERCONNECT cause_out_reg[1]/Q U143/A4 (0.00::0.00))
+    (INTERCONNECT cause_out_reg[1]/Q cause_out[1] (0.00::0.00))
+    (INTERCONNECT cause_out_reg[3]/Q U127/A2 (0.00::0.00))
+    (INTERCONNECT cause_out_reg[3]/Q cause_out[3] (0.00::0.00))
+    (INTERCONNECT U76/Y U111/A3 (0.00::0.00))
+    (INTERCONNECT U76/Y U78/A3 (0.00::0.00))
+    (INTERCONNECT U76/Y U77/A3 (0.00::0.00))
+    (INTERCONNECT U79/Y U80/A3 (0.00::0.00))
+    (INTERCONNECT U80/Y U129/A2 (0.00::0.00))
+    (INTERCONNECT U80/Y U128/A2 (0.00::0.00))
+    (INTERCONNECT U80/Y U81/A (0.00::0.00))
+    (INTERCONNECT U80/Y flush_out (0.00::0.00))
+    (INTERCONNECT U81/Y instret_inc_out (0.00::0.00))
+    (INTERCONNECT U84/Y U124/A2 (0.00::0.00))
+    (INTERCONNECT U84/Y U85/A (0.00::0.00))
+    (INTERCONNECT U85/Y U97/A1 (0.00::0.00))
+    (INTERCONNECT U86/Y U130/A2 (0.00::0.00))
+    (INTERCONNECT U86/Y U87/A (0.00::0.00))
+    (INTERCONNECT U87/Y U121/A1 (0.00::0.00))
+    (INTERCONNECT U87/Y U97/A2 (0.00::0.00))
+    (INTERCONNECT U88/Y U90/A1 (0.00::0.00))
+    (INTERCONNECT U91/Y U93/A1 (0.00::0.00))
+    (INTERCONNECT U92/Y U93/A2 (0.00::0.00))
+    (INTERCONNECT U95/Y U96/A3 (0.00::0.00))
+    (INTERCONNECT U96/Y U122/A4 (0.00::0.00))
+    (INTERCONNECT U96/Y U97/A4 (0.00::0.00))
+    (INTERCONNECT U97/Y U109/A1 (0.00::0.00))
+    (INTERCONNECT U98/Y U106/A2 (0.00::0.00))
+    (INTERCONNECT U99/Y U105/A3 (0.00::0.00))
+    (INTERCONNECT U100/Y U104/A1 (0.00::0.00))
+    (INTERCONNECT U101/Y U104/A2 (0.00::0.00))
+    (INTERCONNECT U102/Y U104/A3 (0.00::0.00))
+    (INTERCONNECT U103/Y U104/A4 (0.00::0.00))
+    (INTERCONNECT U104/Y U105/A4 (0.00::0.00))
+    (INTERCONNECT U105/Y U106/A3 (0.00::0.00))
+    (INTERCONNECT U107/Y U114/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U107/Y U108/A (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U108/Y U109/A2 (0.00::0.00))
+    (INTERCONNECT U108/Y U118/A2 (0.00::0.00))
+    (INTERCONNECT U112/Y U123/A (0.00::0.00))
+    (INTERCONNECT U112/Y U113/A3 (0.00::0.00))
+    (INTERCONNECT U113/Y U118/A1 (0.00::0.00))
+    (INTERCONNECT U113/Y U114/A2 (0.00::0.00))
+    (INTERCONNECT U114/Y U140/A2 (0.00::0.00))
+    (INTERCONNECT U114/Y U125/A4 (0.00::0.00))
+    (INTERCONNECT U114/Y U117/A2 (0.00::0.00))
+    (INTERCONNECT U117/Y U127/A1 (0.00::0.00))
+    (INTERCONNECT U118/Y U141/A (0.00::0.00))
+    (INTERCONNECT U118/Y U121/A2 (0.00::0.00))
+    (INTERCONNECT U120/Y U139/A5 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U120/Y U121/A3 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U121/Y U138/A1 (0.00::0.00))
+    (INTERCONNECT U121/Y U125/A1 (0.00::0.00))
+    (INTERCONNECT U122/Y U125/A2 (0.00::0.00))
+    (INTERCONNECT U123/Y U142/A4 (0.00::0.00))
+    (INTERCONNECT U123/Y U124/A1 (0.00::0.00))
+    (INTERCONNECT U124/Y U125/A3 (0.00::0.00))
+    (INTERCONNECT U125/Y U146/A3 (0.00::0.00))
+    (INTERCONNECT U125/Y U144/A3 (0.00::0.00))
+    (INTERCONNECT U125/Y U143/A2 (0.00::0.00))
+    (INTERCONNECT U125/Y U126/A (0.00::0.00))
+    (INTERCONNECT U126/Y U146/A1 (0.00::0.00))
+    (INTERCONNECT U126/Y U144/A1 (0.00::0.00))
+    (INTERCONNECT U126/Y U143/A3 (0.00::0.00))
+    (INTERCONNECT U126/Y U137/A1 (0.00::0.00))
+    (INTERCONNECT U126/Y U127/S0 (0.00::0.00))
+    (INTERCONNECT U127/Y cause_out_reg[3]/D (0.00::0.00))
+    (INTERCONNECT U128/Y pc_src_out[0] (0.00::0.00))
+    (INTERCONNECT U129/Y pc_src_out[1] (0.00::0.00))
+    (INTERCONNECT U132/Y U133/A3 (0.00::0.00))
+    (INTERCONNECT U134/Y curr_state_reg[1]/D (0.00::0.00))
+    (INTERCONNECT U135/Y curr_state_reg[2]/D (0.00::0.00))
+    (INTERCONNECT U136/Y curr_state_reg[3]/D (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U137/Y U138/A2 (0.00::0.00))
+    (INTERCONNECT U138/Y cause_out_reg[2]/D (0.00::0.00))
+    (INTERCONNECT U139/Y U145/A (0.00::0.00))
+    (INTERCONNECT U139/Y U140/A1 (0.00::0.00))
+    (INTERCONNECT U140/Y U144/A4 (0.00::0.00))
+    (INTERCONNECT U140/Y U143/A1 (0.00::0.00))
+    (INTERCONNECT U141/Y U142/A2 (0.00::0.00))
+    (INTERCONNECT U142/Y U143/A5 (0.00::0.00))
+    (INTERCONNECT U143/Y cause_out_reg[1]/D (0.00::0.00))
+    (INTERCONNECT U144/Y cause_out_reg[0]/D (0.00::0.00))
+    (INTERCONNECT U145/Y U146/A4 (0.00::0.00))
+    (INTERCONNECT U146/Y i_or_e_out_reg/D (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U109/Y U131/A (0.00::0.00))
+    (INTERCONNECT U109/Y U136/A2 (0.00::0.00))
+    (INTERCONNECT U109/Y trap_taken_out (0.00::0.00))
+    (INTERCONNECT U116/Y U136/A1 (0.00::0.00))
+    (INTERCONNECT U116/Y U135/A1 (0.00::0.00))
+    (INTERCONNECT U116/Y U117/A3 (0.00::0.00))
+    (INTERCONNECT U133/Y U136/A3 (0.00::0.00))
+    (INTERCONNECT U133/Y U134/A4 (0.00::0.00))
+    (INTERCONNECT U106/Y U133/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U106/Y U107/A4 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U77/Y U149/A (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U77/Y U128/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U78/Y U147/A (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U78/Y U129/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U111/Y U148/A (0.00::0.00))
+    (INTERCONNECT U111/Y U112/A3 (0.00::0.00))
+    (INTERCONNECT U94/Y U112/A1 (0.00::0.00))
+    (INTERCONNECT U94/Y U97/A3 (0.00::0.00))
+    (INTERCONNECT U93/Y U94/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U93/Y U120/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U130/Y misaligned_exception_out_reg/D (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U82/Y U130/A3 (0.00::0.00))
+    (INTERCONNECT U82/Y U116/A2 (0.00::0.00))
+    (INTERCONNECT U82/Y U134/A5 (0.00::0.00))
+    (INTERCONNECT U82/Y U122/A5 (0.00::0.00))
+    (INTERCONNECT U82/Y U120/A2 (0.00::0.00))
+    (INTERCONNECT U82/Y U112/A2 (0.00::0.00))
+    (INTERCONNECT U83/Y U139/A4 (0.00::0.00))
+    (INTERCONNECT U83/Y U122/A2 (0.00::0.00))
+    (INTERCONNECT U83/Y U120/A4 (0.00::0.00))
+    (INTERCONNECT U110/Y U116/A1 (0.00::0.00))
+    (INTERCONNECT U110/Y U122/A1 (0.00::0.00))
+    (INTERCONNECT U115/Y mie_clear_out (0.00::0.00))
+    (INTERCONNECT U115/Y set_cause_out (0.00::0.00))
+    (INTERCONNECT U115/Y set_epc_out (0.00::0.00))
+    (INTERCONNECT U119/Y mie_set_out (0.00::0.00))
+    (INTERCONNECT U131/Y U135/A2 (0.00::0.00))
+    (INTERCONNECT U131/Y U134/A2 (0.00::0.00))
+    (INTERCONNECT U89/Y U90/A2 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U90/Y U83/A (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U90/Y U94/A1 (0.00::0.00)(0.00::0.00))
+    (INTERCONNECT U147/Y U115/A (0.00::0.00))
+    (INTERCONNECT U147/Y U80/A2 (0.00::0.00))
+    (INTERCONNECT U148/Y U110/A (0.00::0.00))
+    (INTERCONNECT U148/Y U139/A2 (0.00::0.00))
+    (INTERCONNECT U148/Y U134/A3 (0.00::0.00))
+    (INTERCONNECT U148/Y U134/A1 (0.00::0.00))
+    (INTERCONNECT U148/Y U122/A3 (0.00::0.00))
+    (INTERCONNECT U148/Y U120/A3 (0.00::0.00))
+    (INTERCONNECT U149/Y U119/A (0.00::0.00))
+    (INTERCONNECT U149/Y U80/A1 (0.00::0.00))
+    )
+  )
+)
+)

@@ -1,0 +1,290 @@
+ 
+                              Library Manager (TM)
+
+                Version V-2023.12-SP4 for linux64 - Jun 03, 2024
+                           Base build date 2024/05/13
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Information: Term was not able to be set up using xterm-256color . Using "xterm" by default instead. (CLE-10)
+create_workspace -technology /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/tech/saed32nm_1p9m.tf -flow normal msrv32_machine_control
+Information: Loading technology file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/tech/saed32nm_1p9m.tf' (FILE-007)
+... created workspace msrv32_machine_control
+read_gds /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_with_clk/output/riscv_MACRO_with_clk_mc.gds
+Running read_gds
+        Command Options:
+                Library Name                            None
+                Layer Map                               None
+                Block Map                               None
+                Merge Action                            add
+                Keep Text Boxes                         No
+                Trace Connectivity Option               Auto
+                Trace Connectivity Limit                None
+                Net Property                            None
+                Cell Property                           None
+                Pin Property                            None
+                Via Property                            None
+                ASCII File                              None
+                Verbose                                 No
+                Centerline Boundary                     Disabled
+                Mask Fixed                              False
+                Layer Map Format                        ICC2
+                Files Read                              /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_with_clk/output/riscv_MACRO_with_clk_mc.gds
+
+        Application Settings:
+                file.gds.create_custom_via              false
+                file.gds.exclude_layers                 none
+                file.gds.port_type_map                  none
+                file.gds.text_layer_map                 none
+                file.gds.trace_unmapped_text            false
+                file.gds.trace_terminal_text                    none
+                file.gds.trace_terminal_length_4x_width                 none
+                file.gds.trace_terminal_length_exclude_list                     none
+                file.gds.trace_terminal_length_layer_pairs                      none
+                file.gds.trace_terminal_length          0.000000
+                file.gds.trace_terminal_type            unset
+                file.gds.trace_terminal_length_layers                   none
+                file.gds.trace_copy_overlap_shape_from_sub_cell         false
+                file.gds.trace_net_after_flattening             false
+                file.gds.trace_terminal_length_boundary_only            false
+                file.gds.trace_merge_overlap_mask               false
+                file.gds.use_only_mapped_text           false
+
+-------------------------------------------------------------
+
+Information: Loading GDS file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_with_clk/output/riscv_MACRO_with_clk_mc.gds' (FILE-007)
+Information: Translating structure 'msrv32_machine_control' as cell 'riscv_MACRO_with_clk_mc_block/msrv32_machine_control'. (GDS-050)
+Information: Translating structure '$$VIA67LG_C_1860_1860_2_1_0' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA67LG_C_1860_1860_2_1_0'. (GDS-050)
+Information: Translating structure '$$VIA12SQ_C_1200_1200_1_2_0' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA12SQ_C_1200_1200_1_2_0'. (GDS-050)
+Information: Translating structure '$$VIA67LG_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA67LG_C'. (GDS-050)
+Information: Translating structure '$$VIA23LG_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA23LG_C'. (GDS-050)
+Information: Translating structure '$$VIA34LG_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA34LG_C'. (GDS-050)
+Information: Translating structure '$$VIA45LG_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA45LG_C'. (GDS-050)
+Information: Translating structure '$$VIA56LG_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA56LG_C'. (GDS-050)
+Information: Translating structure '$$VIA12BAR_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA12BAR_C'. (GDS-050)
+Information: Translating structure '$$VIA12SQ_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA12SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA23SQ_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA23SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA34SQ_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA34SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA45SQ_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA45SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA56SQ_C' as cell 'riscv_MACRO_with_clk_mc_block/$$VIA56SQ_C'. (GDS-050)
+Information: Read GDSII into a new library 'riscv_MACRO_with_clk_mc_block'. (GDS-021)
+
+-------------------------------------------------------------
+
+Cell Statistics
+              Rectangles        Polygons           Paths      Cut Shapes          Arrays            Text       Instances        Cell Name
+                      77               0             769               0               0              63             879        msrv32_machine_control
+                       2               0               0               2               0               0               0        $$VIA67LG_C_1860_1860_2_1_0
+                       2               0               0               2               0               0               0        $$VIA12SQ_C_1200_1200_1_2_0
+                       2               0               0               1               0               0               0        $$VIA67LG_C
+                       2               0               0               1               0               0               0        $$VIA23LG_C
+                       2               0               0               1               0               0               0        $$VIA34LG_C
+                       2               0               0               1               0               0               0        $$VIA45LG_C
+                       2               0               0               1               0               0               0        $$VIA56LG_C
+                       2               0               0               1               0               0               0        $$VIA12BAR_C
+                       2               0               0               1               0               0               0        $$VIA12SQ_C
+                       2               0               0               1               0               0               0        $$VIA23SQ_C
+                       2               0               0               1               0               0               0        $$VIA34SQ_C
+                       2               0               0               1               0               0               0        $$VIA45SQ_C
+                       2               0               0               1               0               0               0        $$VIA56SQ_C
+
+Layer Statistics
+            Layer Number        Datatype        Polygons      Cut Shapes           Paths      Rectangles            Text
+                      11               0               0               0              75               3               0
+                      12               0               0               4               0               0               0
+                      13               0               0               0             366               5               0
+                      14               0               0               2               0               0               0
+                      15               0               0               0             220               4               0
+                      16               0               0               2               0               0               0
+                      17               0               0               0              75              53              49
+                      18               0               0               2               0               0               0
+                      19               0               0               0              14              16              12
+                      20               0               0               2               0               0               0
+                      21               0               0               0              10              12               0
+                      22               0               0               3               0               0               0
+                      23               0               0               0               9              10               2
+
+Object Summary
+        Instances                                    879
+        Cut Shapes                                    15
+        Arrays                                         0
+        Polygons                                       0
+        Paths                                        769
+        Rectangles                                   103
+        Text                                          63
+        Cells                                         14
+        Skipped Zero-Area Polygons                     0
+
+-------------------------------------------------------------
+Warning: Library riscv_MACRO_with_clk_mc_block has no reference libraries. (LNK-063)
+Using libraries: riscv_MACRO_with_clk_mc_block
+Visiting block riscv_MACRO_with_clk_mc_block:msrv32_machine_control.design
+Linking block riscv_MACRO_with_clk_mc_block:DFFX1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:DFFX1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:INVX0_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND4X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND3X0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OR2X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:AND2X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:AND4X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NOR3X0_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NOR4X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NOR3X0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND2X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OAI21X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND2X0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OA21X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OA221X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND4X0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:INVX0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:MUX21X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND2X0_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NOR2X0_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:AO22X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:AO221X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NAND2X1_RVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OR3X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NOR2X0_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:OA21X1_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NBUFFX2_HVT.design
+Linking block riscv_MACRO_with_clk_mc_block:NBUFFX4_HVT.design
+Expanding block riscv_MACRO_with_clk_mc_block:msrv32_machine_control.design
+Design 'msrv32_machine_control' was successfully linked.
+Warning: The Application option "file.gds.port_type_map" is notdefined before "read_gds" command. (GDS-022)
+{riscv_MACRO_with_clk_mc_block}
+set_attribute [get_lib_cells msrv32_machine_control] design_type macro
+{riscv_MACRO_with_clk_mc_block/msrv32_machine_control/design}
+check_workspace
+Information: The command 'check_workspace' cleared the undo history. (UNDO-016)
+Checking libraries...
+Information: Copied 1 physical design (LM-050)
+Warning:  Direction for port clk_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port reset_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port illegal_instr_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port misaligned_load_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port misaligned_store_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port misaligned_instr_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_6_to_2_in[6] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_6_to_2_in[5] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_6_to_2_in[4] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_6_to_2_in[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_6_to_2_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct3_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct3_in[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct3_in[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[6] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[5] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[4] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port funct7_in[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs1_addr_in[4] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs1_addr_in[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs1_addr_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs1_addr_in[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs1_addr_in[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs2_addr_in[4] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs2_addr_in[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs2_addr_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs2_addr_in[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rs2_addr_in[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rd_addr_in[4] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rd_addr_in[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rd_addr_in[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rd_addr_in[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port rd_addr_in[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port e_irq_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port t_irq_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port s_irq_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port mie_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port meie_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port mtie_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port msie_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port meip_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port mtip_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port msip_in on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port i_or_e_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port cause_out[3] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port cause_out[2] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port set_epc_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port set_cause_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port cause_out[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port cause_out[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port instret_inc_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port mie_clear_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port mie_set_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port misaligned_exception_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port pc_src_out[1] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port pc_src_out[0] on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port flush_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port trap_taken_out on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port VDD on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+Warning:  Direction for port VSS on msrv32_machine_control/msrv32_machine_control/design is changed from unknown to in (LM-055)
+... creating frames for msrv32_machine_control
+Information: Block msrv32_machine_control.frame, the feature of blocking core area is set on specific layers. New zero-spacing routing blockages and RC metal are added on layers: M1 M2 M3 M4 M5 M6 M7. (FRAM-045)
+Information: Block msrv32_machine_control.frame, the feature of blockage trimming by pin is set to 'touch' on specific layers. All metal shapes and routing blockages touch pins in design view are trimmed on layers: PO M1 M2 M3 M4 M5 M6 M7 M8 M9 MRDL NWELL. (FRAM-046)
+... created 1 frames
+Warning: Bus property only exist in frame view msrv32_machine_control/cause_out[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/cause_out[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/cause_out[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/cause_out[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct3_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct3_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct3_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[6]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[5]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/funct7_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/opcode_6_to_2_in[6]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/opcode_6_to_2_in[5]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/opcode_6_to_2_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/opcode_6_to_2_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/opcode_6_to_2_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/pc_src_out[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/pc_src_out[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rd_addr_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rd_addr_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rd_addr_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rd_addr_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rd_addr_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs1_addr_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs1_addr_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs1_addr_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs1_addr_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs1_addr_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs2_addr_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs2_addr_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs2_addr_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs2_addr_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_machine_control/rs2_addr_in[0]. (LM-095)
+
+Workspace check succeeded!
+commit_workspace -output msrv32_machine_control.ndm
+... wrote msrv32_machine_control.ndm
+... removing library 'riscv_MACRO_with_clk_mc_block'
+... lib workspace removed!
+open_lib ./msrv32_machine_control.ndm
+Information: Loading library file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/LM/RISCV_Macro_with_clk/msrv32_machine_control.ndm' (FILE-007)
+Information: Library is effectively read-only. (LMUI-027)
+{msrv32_machine_control}
+lm_shell> change_selection [get_lib_cells -include_subcells {msrv32_machine_control/msrv32_machine_control/frame}]
+lm_shell> current_block msrv32_machine_control:msrv32_machine_control.frame
+lm_shell> 

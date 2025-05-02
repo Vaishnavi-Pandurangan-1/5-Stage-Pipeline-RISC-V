@@ -1,0 +1,1081 @@
+#@ # 
+#@ # Running icc2_shell Version T-2022.03-SP4 for linux64 -- Aug 31, 2022
+#@ # Date:   Fri Apr 25 09:33:02 2025
+#@ # Run by: Vaishnavii@mavenserver-RH2
+#@ 
+
+gui_set_pref_value -category {SelectByNamePalette} -key {ObjectType} -value {Logical Cells}
+open_lib /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/work_riscv_top_block/riscv_final_block -edit
+open_block /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/work_riscv_top_block/riscv_final_block:pns_done.design
+link_block
+win_set_filter -visible -class cell -filter {clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -visible -class pseudo_bump -filter {deleted}
+win_set_filter -visible -class pseudo_tsv -filter {deleted}
+win_set_filter -visible -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_filter -expand_cell_types {soft_macro  }
+win_set_select_class -visible {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell placement_blockage }
+win_set_filter -class cell -filter {array clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -class pseudo_bump -filter {deleted}
+win_set_filter -class pseudo_tsv -filter {deleted}
+win_set_filter -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_select_class {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via placement_blockage }
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {11} -core_utilization {0.7} -orientation N
+undo
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showPin -value true
+win_set_select_class -visible {cell pin port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell placement_blockage }
+win_set_select_class {cell pin port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via placement_blockage }
+reset_placement
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 \
+   -horizontal_width {1} -horizontal_spacing {1} \
+   -vertical_layer M8 -vertical_width {1} -vertical_spacing {1}
+ 
+set_pg_strategy core_ring \
+   -pattern {{name: ring_pattern} \
+   {nets: {VDD VSS}} {offset: {1.5 2}}} -core \
+	-extension {stop:design_boundary_and_generate_pin}
+ 
+compile_pg -strategies core_ring 
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+set all_macros [get_cells -hierarchical -filter "is_hard_macro && !is_physical_only"]
+
+create_pg_mesh_pattern P_top_two \
+	-layers { \
+		{ {horizontal_layer: M9} {width: 1.5} {spacing: interleaving} {pitch: 10} {offset: 1}  {trim : true} } \
+		{ {vertical_layer: M8}   {width: 1} {spacing: interleaving} {pitch: 11} {offset: 1}   {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy M9M8_mesh -pattern {{name: P_top_two } {nets: VDD VSS}} -core \
+                          -extension {stop:outermost_ring} \
+                          -blockage {{nets:VDD VSS}{macros: $all_macros}}
+
+compile_pg -strategies M9M8_mesh 
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_mesh_pattern P_m2_triple \
+	-layers { \
+		{ {vertical_layer: M2} {width: 0.095} {spacing: interleaving} {pitch: 10}  {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} } 
+ 
+set_pg_strategy M2_mesh -pattern {{name: P_m2_triple } {nets: VDD VSS}} -core \
+                         
+compile_pg -strategies M2_mesh
+
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+ 
+set_pg_strategy M1_rails -core \
+   -pattern {{name: rail_pattern}{nets: VDD VSS}}
+ 
+compile_pg -strategies M1_rails
+
+# set_attribute [get_cells -physical_context -filter design_type == macro] physical_standard fixed
+##################################
+check_pg_connectivity
+check_pg_drc 
+check_pg_missing_vias
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 \
+   -horizontal_width {1} -horizontal_spacing {1} \
+   -vertical_layer M8 -vertical_width {1} -vertical_spacing {1}
+ 
+set_pg_strategy core_ring \
+   -pattern {{name: ring_pattern} \
+   {nets: {VDD VSS}} {offset: {1.5 2}}} -core \
+	-extension {stop:design_boundary_and_generate_pin}
+ 
+compile_pg -strategies core_ring 
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+set all_macros [get_cells -hierarchical -filter "is_hard_macro && !is_physical_only"]
+
+create_pg_mesh_pattern P_top_two \
+	-layers { \
+		{ {horizontal_layer: M9} {width: 0.7} {spacing: interleaving} {pitch: 10} {offset: 1}  {trim : true} } \
+		{ {vertical_layer: M8}   {width: 1} {spacing: interleaving} {pitch: 11} {offset: 1}   {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy M9M8_mesh -pattern {{name: P_top_two } {nets: VDD VSS}} -core \
+                          -extension {stop:outermost_ring} \
+                          -blockage {{nets:VDD VSS}{macros: $all_macros}}
+
+compile_pg -strategies M9M8_mesh 
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_mesh_pattern P_m2_triple \
+	-layers { \
+		{ {vertical_layer: M2} {width: 0.095} {spacing: interleaving} {pitch: 10}  {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} } 
+ 
+set_pg_strategy M2_mesh -pattern {{name: P_m2_triple } {nets: VDD VSS}} -core \
+                         
+compile_pg -strategies M2_mesh
+
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+ 
+set_pg_strategy M1_rails -core \
+   -pattern {{name: rail_pattern}{nets: VDD VSS}}
+ 
+compile_pg -strategies M1_rails
+
+# set_attribute [get_cells -physical_context -filter design_type == macro] physical_standard fixed
+##################################################################
+
+#####################################################################
+# PIN PLACEMENT
+#####################################################################
+#### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 \
+   -horizontal_width {1} -horizontal_spacing {1} \
+   -vertical_layer M8 -vertical_width {1} -vertical_spacing {1}
+ 
+set_pg_strategy core_ring \
+   -pattern {{name: ring_pattern} \
+   {nets: {VDD VSS}} {offset: {1.5 2}}} -core \
+	-extension {stop:design_boundary_and_generate_pin}
+ 
+compile_pg -strategies core_ring 
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+set all_macros [get_cells -hierarchical -filter "is_hard_macro && !is_physical_only"]
+
+create_pg_mesh_pattern P_top_two \
+	-layers { \
+		{ {horizontal_layer: M9} {width: 0.7} {spacing: interleaving} {pitch: 10} {offset: 1}  {trim : true} } \
+		{ {vertical_layer: M8}   {width: 1} {spacing: interleaving} {pitch: 11} {offset: 1}   {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy M9M8_mesh -pattern {{name: P_top_two } {nets: VDD VSS}} -core \
+                          -extension {stop:outermost_ring} \
+                          -blockage {{nets:VDD VSS}{macros: $all_macros}}
+
+compile_pg -strategies M9M8_mesh 
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_mesh_pattern P_m2_triple \
+	-layers { \
+		{ {vertical_layer: M2} {width: 0.095} {spacing: interleaving} {pitch: 14}  {trim : true} } \
+		} \
+	-via_rule { {intersection: adjacent} {via_master : default} } 
+ 
+set_pg_strategy M2_mesh -pattern {{name: P_m2_triple } {nets: VDD VSS}} -core \
+                         
+compile_pg -strategies M2_mesh
+
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+ 
+set_pg_strategy M1_rails -core \
+   -pattern {{name: rail_pattern}{nets: VDD VSS}}
+ 
+compile_pg -strategies M1_rails
+
+# set_attribute [get_cells -physical_context -filter design_type == macro] physical_standard fixed
+#############################################
+check_pg_connectivity
+check_pg_drc 
+check_pg_missing_vias
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+check_legality
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+place_opt
+gui_zoom -window [gui_get_current_window -view] -full
+check_pg_connectivity
+check_pg_drc
+gui_show_error_data
+gui_set_error_browser_option -show_mode all
+gui_set_error_browser_option -view_mode zoom
+gui_set_error_browser_option -zoom_factor 1.000000
+gui_set_error_browser_option -grouping type
+gui_error_browser -show
+gui_open_error_data -name {DRC_report_by_check_pg_drc}
+gui_set_current_errors -data_name {DRC_report_by_check_pg_drc} -group {Metal Spacing}
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {0}] -force
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {42.298 215.952} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {41.909 214.814} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {43.735 216.041} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {42.926 215.982} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {1}] -force
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {68.411 215.836} -scale 0.0288
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {68.296 215.952} -scale 0.0288
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {68.151 215.000} -scale 0.0288
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {71.236 215.952} -scale 0.0288
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {68.930 215.980} -scale 0.0288
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {2}] -force
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {167.603 215.708} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {170.350 216.105} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+undo
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {167.272 216.138} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {170.714 215.973} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {163.168 215.940} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {165.352 215.940} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {158.766 216.205} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {161.513 216.105} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {163.035 216.072} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {163.863 215.907} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {161.314 216.006} -scale 0.0331
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {161.513 216.039} -scale 0.0331
+gui_error_browser -hide
+check_pg_drc
+place_opt
+check_pg_drc
+check_pg_connectivity
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {DRC_report_by_check_pg_drc}
+gui_open_error_data -name {DRC_report_by_check_pg_drc}
+gui_set_current_errors -data_name {DRC_report_by_check_pg_drc} -group {Metal Spacing}
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {0}] -force
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {109.078 11.056} -scale 0.0002
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {108.403 11.538} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {107.775 11.717} -scale 0.0299
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+place_opt
+check_pg_drc
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {0}] -force
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+check_pg_missing_vias
+save_block -as place_opt_drc_1
+set_app_options -name time.remove_clock_reconvergence_pessimism -value true
+report_clock_settings
+report_qor -summary
+clock_opt
+set_routing_rule *  -default_rule -min_routing_layer M1 -max_routing_layer M9
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M3 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA3 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M4 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA4 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M5 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA5 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M6 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA6 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M7 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA7 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M8 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIA8 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M9 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_VIARDL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_MRDL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_BJTDMY -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DIFF -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DIFF_18 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DIFF_25 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DIFF_FM -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DIOD -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM1EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM2EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM3EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM4EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM5EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM6EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM7EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM8EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DM9EXCL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_DNW -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_ESD_25 -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_HOTNWL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_HVTIMP -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_IP -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_LOGO -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_LVTIMP -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M1PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M2PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M3PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M4PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M5PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M6PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_M7PIN -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_NWELL -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_PO -value false
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showLayer_CO -value false
+win_set_filter -visible -class pin -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -visible -class routing_blockage -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -visible -class shape -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -visible -class via -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -visible -class terminal -filter {}  -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -class pin -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -class routing_blockage -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -class shape -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+win_set_filter -class via -filter {} -layer {0-1 3 10 12-13 15-16 18-19 21-22 24-25 27-28 30-33 35-61}
+gui_show_error_data
+gui_error_browser -show
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {94.413 11.815} -scale 0.0162
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+save_block -as clock_opt_drc_4
+set_routing_rule -clear -default_rule -min_routing_layer 1 -max_routing_layer 9
+route_auto -max_detail_route_iterations 30
+route_opt
+route_eco
+set_routing_rule -clear -default_rule -min_routing_layer 1 -max_routing_layer 9
+set_routing_rule {N62 N63 N64 N66 VDD VSS cause_out[0] cause_out[1] cause_out[2] cause_out[3] \
+	       clk_in curr_state[0] curr_state[1] curr_state[2] curr_state[3] e_irq_in flush_out \
+                 funct3_in[0] funct3_in[1] funct3_in[2] funct7_in[0] funct7_in[1] funct7_in[2] funct7_in[3] \
+                 funct7_in[4] funct7_in[5] funct7_in[6] i_or_e_out illegal_instr_in instret_inc_out \
+                 meie_in meip_in mie_in mie_set_out misaligned_exception_out \
+                 misaligned_instr_in misaligned_load_in misaligned_store_in \
+                 msie_in msip_in mtie_in mtip_in n60 n61 n62 n63 n64 n65 n66 n67 n68 \
+                 n69 n70 n71 n72 n73 n74 n75 n76 n77 n78 n79 n80 n81 n82 n83 n84 n85 n86 \
+                 n87 n88 n89 n91 n92 n93 n94 n95 n96 n97 n98 n99 n100 n103 n104 n105 n106 n107 \
+                 n109 n110 n111 n112 n113 n114 n115 n116 n117 n118 n119 n120 n121 n122 n123 n124 \
+                 n125 n128 n129 n130 n131 opcode_6_to_2_in[2] opcode_6_to_2_in[3] opcode_6_to_2_in[4] \
+                 opcode_6_to_2_in[5] opcode_6_to_2_in[6] pc_src_out[0] pc_src_out[1] rd_addr_in[0] \
+                 rd_addr_in[1] rd_addr_in[2] rd_addr_in[3] rd_addr_in[4] reset_in rs1_addr_in[0] \
+                 rs1_addr_in[1] rs1_addr_in[2] rs1_addr_in[3] rs1_addr_in[4] rs2_addr_in[0] rs2_addr_in[1] 
+                 rs2_addr_in[2] rs2_addr_in[3] rs2_addr_in[4] s_irq_in set_cause_out t_irq_in trap_taken_out} \
+                 -default_rule -min_routing_layer M1 -max_routing_layer M9
+set_routing_rule *  -default_rule -min_routing_layer M1 -max_routing_layer M9
+route_auto -max_detail_route_iterations 30
+route_opt
+route_eco
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+gui_error_browser -hide
+check_pg_drc
+check_pg_connectivity
+check_pg_missing_vias
+check_lvs
+report_congestion
+report_timing
+report_timing -delay_type min
+check_pg_drc
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {DRC_report_by_check_pg_drc}
+gui_set_current_errors -data_name {DRC_report_by_check_pg_drc} -group {Metal Spacing}
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {0}] -force
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_zoom -window [gui_get_current_window -view] -full
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {3}] -force
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+win_select_objects -slct_targets global -at {102.078 216.606} -radius 0.0002
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {102.360 215.836} -scale 0.0077
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {103.349 215.898} -scale 0.0077
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+route_eco
+check_pg_drc 
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {3}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {2}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {3}] -force
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {115.586 215.788} -scale 0.0144
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {114.621 216.004} -scale 0.0144
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_selected_errors -replace [gui_get_errors -data_name {DRC_report_by_check_pg_drc} -id {2}] -force
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {51.727 215.473} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {51.922 215.458} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {48.509 215.413} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {49.348 215.607} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {45.471 215.488} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {45.441 215.847} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {46.653 215.802} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+undo
+undo
+undo
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {44.479 215.305} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {50.423 214.631} -scale 0.015
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {50.199 214.362} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {51.576 214.421} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {45.528 215.544} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+undo
+undo
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {43.881 214.646} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {44.510 214.766} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {44.330 215.649} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {40.483 213.748} -scale 0.015
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+route_eco
+check_lvs
+report_congestion
+report_timing
+report_timing -delay_type min
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_scroll -window [gui_get_current_window -view] -vrel -.2
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {90.969 11.315} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {90.709 11.396} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {91.748 11.461} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {91.521 11.477} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {94.005 11.575} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {92.868 11.770} -scale 0.0162
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+route_eco
+check_pg_drc
+check_lvs
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {31.495 216.478} -scale 0.0272
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {30.108 214.792} -scale 0.0272
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+route_eco
+check_lvs
+check_pg_drc
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+win_select_objects -slct_targets global -at {115.931 216.614} -radius 0.0002
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {115.053 216.105} -scale 0.0144
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {114.218 216.263} -scale 0.0144
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+route_eco
+check_lvs
+check_pg_drc
+check_pg_missing_vias
+report_congestion
+report_timing
+gui_error_browser -hide
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[54]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[54]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[54]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[54]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[12]/Q}]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells {CSRF/MC/mcycle_out_reg[12]}]
+size_cell {CSRF/MC/mcycle_out_reg[12]} -lib_cell saed32_lvt|saed32_lvt_std/DFFX1_LVT
+size_cell {CSRF/MC/mcycle_out_reg[12]} -lib_cell saed32_lvt|saed32_lvt_std/DFFX1_LVT
+update_timing -full
+report_timing
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/MC/U722/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/MC/U722]
+size_cell CSRF/MC/U722 -lib_cell saed32_rvt|saed32_rvt_std/AOI22X1_RVT
+size_cell CSRF/MC/U722 -lib_cell saed32_rvt|saed32_rvt_std/AOI22X1_RVT
+update_timing
+update_timing -full
+report_timing
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins {REG2/imm_reg_out_reg[3]/Q}]
+change_selection [get_pins CSRF/DRMU/U69/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/DRMU/U69]
+size_cell CSRF/DRMU/U69 -lib_cell saed32_lvt|saed32_lvt_std/OAI21X1_LVT
+size_cell CSRF/DRMU/U69 -lib_cell saed32_lvt|saed32_lvt_std/OAI21X1_LVT
+update_timing -full
+report_timing
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/MC/U701/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/MC/U701]
+size_cell CSRF/MC/U701 -lib_cell saed32_lvt|saed32_lvt_std/OAI21X1_LVT
+size_cell CSRF/MC/U701 -lib_cell saed32_lvt|saed32_lvt_std/OAI21X1_LVT
+update_timing
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/MC/U966/C1]
+change_selection [get_pins CSRF/MC/U916/C1]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_pins CSRF/MC/U916/SO]
+change_selection [get_cells CSRF/MC/U916]
+size_cell CSRF/MC/U916 -lib_cell saed32_lvt|saed32_lvt_std/HADDX2_LVT
+size_cell CSRF/MC/U916 -lib_cell saed32_lvt|saed32_lvt_std/HADDX2_LVT
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[47]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[47]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[47]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[47]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/CDMU/U137/Y]
+change_selection [get_pins CSRF/CDMU/U137/Y]
+change_selection -add [get_pins CSRF/CDMU/U138/Y]
+change_selection [get_pins CSRF/CDMU/U137/Y]
+change_selection -add [get_pins CSRF/CDMU/U138/Y]
+change_selection -add [get_pins CSRF/CDMU/U140/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/CDMU/U137]
+size_cell CSRF/CDMU/U137 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+size_cell CSRF/CDMU/U137 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[61]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {CSRF/MC/minstret_out_reg[58]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/CDMU/U100/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/CDMU/U100]
+size_cell CSRF/CDMU/U100 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+size_cell CSRF/CDMU/U100 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+change_selection [get_pins CSRF/CDMU/U101/A]
+change_selection [get_pins CSRF/CDMU/U101/A]
+change_selection [get_cells CSRF/CDMU/U101]
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[20]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins IRF/U1803/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_pins IRF/U1804/Y]
+change_selection [get_pins IRF/U1803/Y]
+change_selection [get_pins IRF/U1803/A3]
+change_selection [get_cells IRF/U1803]
+size_cell IRF/U1803 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+size_cell IRF/U1803 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+change_selection [get_pins IRF/U1804/Y]
+change_selection [get_cells IRF/U1804]
+size_cell IRF/U1804 -lib_cell saed32_lvt|saed32_lvt_std/INVX0_LVT
+size_cell IRF/U1804 -lib_cell saed32_lvt|saed32_lvt_std/INVX0_LVT
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection 
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/MC/U5/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_pins CSRF/MC/U5/A3]
+change_selection 
+change_selection [get_pins CSRF/MC/U5/Y]
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+change_selection [get_pins CSRF/MC/U5/Y]
+change_selection [get_cells CSRF/MC/U5]
+size_cell CSRF/MC/U5 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+size_cell CSRF/MC/U5 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection 
+change_selection [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {CSRF/MC/mcycle_out_reg[63]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/MC/U1113/C1]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/MC/U1113]
+size_cell CSRF/MC/U1113 -lib_cell saed32_lvt|saed32_lvt_std/HADDX1_LVT
+size_cell CSRF/MC/U1113 -lib_cell saed32_lvt|saed32_lvt_std/HADDX1_LVT
+update_timing
+change_selection [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+change_selection -add [get_pins {REG1/pc_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins CSRF/CDMU/U127/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells CSRF/CDMU/U127]
+size_cell CSRF/CDMU/U127 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+size_cell CSRF/CDMU/U127 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+update_timing
+report_timing
+check_lvs
+report_timing -delay_type min
+check_pg_drc 
+check_pg_missing_vias
+check_lvs
+route_auto -max_detail_route_iterations 30
+route_opt
+route_eco
+check_lvs
+report_timing
+report_timing -delay_type min
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+report_constraints -all_violators
+save_block -as report_constarints_7
+change_selection [get_pin ZBUF_316_inst_3537/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells ZBUF_316_inst_3537]
+size_cell ZBUF_316_inst_3537 -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX8_HVT
+size_cell ZBUF_316_inst_3537 -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX8_HVT
+route_opt
+report_constraints -all_violators
+change_selection [get_pins CSRF/MC/minstret_out_reg[45]/Q]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells {CSRF/MC/minstret_out_reg[45]}]
+size_cell {CSRF/MC/minstret_out_reg[45]} -lib_cell saed32_hvt|saed32_hvt_std/DFFX2_HVT
+size_cell {CSRF/MC/minstret_out_reg[45]} -lib_cell saed32_hvt|saed32_hvt_std/DFFX2_HVT
+report_constraints -all_violators
+change_selection [get_pins IRF/U122/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells IRF/U122]
+size_cell IRF/U122 -lib_cell saed32_hvt|saed32_hvt_std/INVX8_HVT
+size_cell IRF/U122 -lib_cell saed32_hvt|saed32_hvt_std/INVX8_HVT
+report_constraints -all_violators
+change_selection [get_pins IRF/HFSBUF_443_2080/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells IRF/HFSBUF_443_2080]
+size_cell IRF/HFSBUF_443_2080 -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX8_HVT
+size_cell IRF/HFSBUF_443_2080 -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX8_HVT
+change_selection [get_pins CSRF/MC/minstret_out_reg[37]/Q]
+change_selection [get_cells {CSRF/MC/minstret_out_reg[37]}]
+size_cell {CSRF/MC/minstret_out_reg[37]} -lib_cell saed32_hvt|saed32_hvt_std/DFFX2_HVT
+report_constraints -all_violators
+change_selection [get_pins CSRF/MC/minstret_out_reg[52]/Q]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells {CSRF/MC/minstret_out_reg[52]}]
+size_cell {CSRF/MC/minstret_out_reg[52]} -lib_cell saed32_rvt|saed32_rvt_std/DFFX2_RVT
+change_selection [get_pins PC/ropt_mt_inst_5265/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells PC/ropt_mt_inst_5265]
+size_cell PC/ropt_mt_inst_5265 -lib_cell saed32_hvt|saed32_hvt_std/DELLN2X2_HVT
+report_constraints -all_violators
+change_selection [get_pins PC/ropt_mt_inst_5265/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells PC/ropt_mt_inst_5265]
+size_cell PC/ropt_mt_inst_5265 -lib_cell saed32_hvt|saed32_hvt_std/DELLN3X2_HVT
+size_cell PC/ropt_mt_inst_5265 -lib_cell saed32_hvt|saed32_hvt_std/DELLN3X2_HVT
+report_constraints -all_violators
+report_constraints -all_violators
+change_selection [get_pins PC/ropt_mt_inst_5265/Y]
+change_selection [add_buffer [get_pins -design [current_block] {PC/ropt_mt_inst_5265/Y}] -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX32_HVT]
+change_selection [add_buffer [get_pins -design [current_block] {PC/ropt_mt_inst_5265/Y}] -lib_cell saed32_hvt|saed32_hvt_std/NBUFFX32_HVT]
+report_constraints -all_violators
+route_eco
+check_lvs
+report_timing
+change_selection [get_pins {REG2/pc_plus_4_reg_out_reg[31]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[31]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[31]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[31]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins PC/U13/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells PC/U13]
+size_cell PC/U13 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+size_cell PC/U13 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+update_timing
+report_timing
+report_timing -delay_type min
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+report_constraints -all_violators
+gui_clear_selected_errors
+route_auto
+route_opt
+route_eco
+check_lvs
+check_pg_drc 
+report_timing 
+report_timing -delay_type min
+check_pg_connectivity
+report_constraints -all_violators
+save_block -as RISCV_final
+change_selection 
+write_script -force -format icc2 -output /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final_spef
+write_parasitics -output /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final_parasitics
+write_sdf /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final.sdf
+write_verilog /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final.v
+write_gds /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final.gds
+write_sdc -output /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/PNR_final/output/riscv_final.sdc

@@ -1,0 +1,26 @@
+#@ # 
+#@ # Running lm_shell Version V-2023.12-SP4 for linux64 -- Jun 03, 2024
+#@ # Date:   Thu Apr 24 10:59:25 2025
+#@ # Run by: Vaishnavii@mavenserver-RH2
+#@ 
+
+gui_set_pref_value -category {SelectByNamePalette} -key {ObjectType} -value {Logical Cells}
+create_workspace -technology /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/tech/saed32nm_1p9m.tf -flow normal msrv32_alu
+read_gds /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_no_clk/output/riscv_MACRO_no_clk_alu.gds
+set_attribute [get_lib_cells msrv32_alu] design_type macro
+check_workspace
+commit_workspace -output msrv32_alu.ndm
+open_lib ./msrv32_alu.ndm
+change_selection [get_lib_cells -include_subcells {msrv32_alu/msrv32_alu/frame}]
+current_block msrv32_alu:msrv32_alu.frame
+win_set_filter -visible -class cell -filter {assembly_die_margin bridge clock_margin hard_macro_margin hard_margin route_blockage_margin seal_ring_margin soft_margin substrate} -layer {}
+win_set_filter -visible -class pseudo_bump -filter {deleted} -layer {}
+win_set_filter -visible -class pseudo_tsv -filter {deleted} -layer {}
+win_set_filter -visible -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_filter -expand_cell_types {soft_macro  }
+win_set_select_class -visible {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell metal_area metal_area_hole placement_blockage }
+win_set_filter -class cell -filter {array assembly_die_margin bridge clock_margin hard_macro_margin hard_margin route_blockage_margin seal_ring_margin soft_margin substrate} -layer {}
+win_set_filter -class pseudo_bump -filter {deleted} -layer {}
+win_set_filter -class pseudo_tsv -filter {deleted} -layer {}
+win_set_filter -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_select_class {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via metal_area metal_area_hole placement_blockage }

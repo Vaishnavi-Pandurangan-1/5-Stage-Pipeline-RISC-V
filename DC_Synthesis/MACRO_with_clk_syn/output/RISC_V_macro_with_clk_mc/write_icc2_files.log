@@ -1,0 +1,17 @@
+Writing verilog file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/DC_Synthesis/MACRO_with_clk/output/RISC_V_macro_with_clk_mc/msrv32_machine_control.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+1
+Information: No Scenarios exist, writing data for one virtual_scenario
+Information: Creating directory /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/DC_Synthesis/MACRO_with_clk/output/RISC_V_macro_with_clk_mc/msrv32_machine_control.MCMM
+Information: There is no user-defined operating conditions in the design. The tool is inferring operating conditions 'ss0p95v125c' from the library 'saed32lvt_ss0p95v125c'. (DCT-399)
+Information: There is no user-defined operating conditions in the design. The tool is inferring operating conditions 'ss0p95v125c' from the library 'saed32lvt_ss0p95v125c'. (DCT-399)
+Information: The default DEF output is in version 5.8. (DCT-320)
+Information: Writing COMPONENTS section (DDEFW-014)
+Information: Completed COMPONENTS section  (DDEFW-016)
+Information: Writing PINS section (DDEFW-014)
+Information: Completed PINS section  (DDEFW-016)
+Information: No groups were written. (RPGP-018)
+1
+Warning: Failed to find cell expansion data in current design.  (PSYN-1240)
+0

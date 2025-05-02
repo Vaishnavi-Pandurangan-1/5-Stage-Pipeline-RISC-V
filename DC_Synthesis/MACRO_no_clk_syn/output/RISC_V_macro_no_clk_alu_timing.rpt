@@ -1,0 +1,73 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : msrv32_alu
+Version: T-2022.03-SP4
+Date   : Wed Apr 23 21:57:55 2025
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+Operating Conditions: ss0p95v125c   Library: saed32lvt_ss0p95v125c
+Wire Load Model Mode: Inactive.
+
+  Startpoint: op_2_in[1] (input port)
+  Endpoint: result_out[31]
+            (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 f
+  op_2_in[1] (in)                          0.00       0.00 f
+  U475/Y (INVX1_LVT)                       0.03 *     0.03 r
+  U552/Y (NAND2X0_LVT)                     0.08 *     0.12 f
+  U553/Y (AO22X1_LVT)                      0.09 *     0.20 f
+  U554/Y (NAND3X0_LVT)                     0.05 *     0.25 r
+  U558/Y (AO21X1_LVT)                      0.08 *     0.33 r
+  U559/Y (AO222X1_LVT)                     0.10 *     0.44 r
+  U560/Y (AO222X1_LVT)                     0.12 *     0.56 r
+  U561/Y (AO222X1_LVT)                     0.12 *     0.67 r
+  U562/Y (AO222X1_LVT)                     0.11 *     0.78 r
+  U563/Y (AO222X1_LVT)                     0.10 *     0.89 r
+  U564/Y (AO222X1_LVT)                     0.12 *     1.01 r
+  U565/Y (AO222X1_LVT)                     0.12 *     1.12 r
+  U566/Y (AO222X1_LVT)                     0.12 *     1.24 r
+  U567/Y (AO222X1_LVT)                     0.11 *     1.35 r
+  U568/Y (AO222X1_LVT)                     0.12 *     1.47 r
+  U569/Y (AO222X1_LVT)                     0.11 *     1.58 r
+  U570/Y (AO222X1_LVT)                     0.11 *     1.69 r
+  U571/Y (AO222X1_LVT)                     0.12 *     1.81 r
+  U572/Y (AO222X1_LVT)                     0.12 *     1.93 r
+  U634/Y (AO222X1_LVT)                     0.10 *     2.03 r
+  U668/Y (AO222X1_LVT)                     0.10 *     2.13 r
+  U703/Y (AO222X1_LVT)                     0.10 *     2.23 r
+  U733/Y (AO222X1_LVT)                     0.10 *     2.34 r
+  U734/Y (AO222X1_LVT)                     0.10 *     2.44 r
+  U735/Y (AO222X1_LVT)                     0.10 *     2.54 r
+  U1176/Y (AO222X1_LVT)                    0.11 *     2.65 r
+  U1177/Y (AO222X1_LVT)                    0.11 *     2.76 r
+  U1178/Y (AO222X1_LVT)                    0.10 *     2.86 r
+  U1179/Y (AO222X1_LVT)                    0.11 *     2.97 r
+  U1180/Y (AO222X1_LVT)                    0.12 *     3.08 r
+  U1181/Y (AO222X2_LVT)                    0.12 *     3.20 r
+  U1182/Y (AO222X1_LVT)                    0.10 *     3.31 r
+  U1183/Y (AO222X1_LVT)                    0.11 *     3.41 r
+  U1201/Y (AO222X1_LVT)                    0.10 *     3.51 r
+  U1202/S (FADDX1_LVT)                     0.12 *     3.63 f
+  U1203/Y (OA22X1_LVT)                     0.05 *     3.68 f
+  U1205/Y (NAND3X0_LVT)                    0.03 *     3.71 r
+  U1208/Y (AO21X1_LVT)                     0.06 *     3.78 r
+  U1209/Y (AO21X1_LVT)                     0.04 *     3.81 r
+  U1210/Y (AO221X1_LVT)                    0.06 *     3.88 r
+  result_out[31] (out)                     0.00 *     3.88 r
+  data arrival time                                   3.88
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

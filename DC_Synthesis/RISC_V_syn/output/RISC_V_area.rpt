@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : msrv32_top
+Version: T-2022.03-SP4
+Date   : Wed Apr 23 20:15:11 2025
+****************************************
+
+Library(s) Used:
+
+    saed32lvt_ss0p95v125c (File: /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/DBs/saed32lvt_ss0p95v125c.db)
+
+Number of ports:                         4184
+Number of nets:                         12583
+Number of cells:                         8694
+Number of combinational cells:           6955
+Number of sequential cells:              1705
+Number of macros/black boxes:               0
+Number of buf/inv:                       1091
+Number of references:                      19
+
+Combinational area:              16337.392977
+Buf/Inv area:                     1771.129543
+Noncombinational area:           11646.403197
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 27983.796174
+Total area:                 undefined
+1

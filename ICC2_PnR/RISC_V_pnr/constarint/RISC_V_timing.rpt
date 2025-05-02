@@ -1,0 +1,129 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : msrv32_top
+Version: T-2022.03-SP4
+Date   : Wed Apr 23 20:16:38 2025
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: ss0p95v125c   Library: saed32lvt_ss0p95v125c
+Wire Load Model Mode: Inactive.
+
+  Startpoint: REG2/alu_src_reg_out_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: MC/cause_out_reg[3]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  REG2/alu_src_reg_out_reg/CLK (DFFX1_LVT)                0.00 #     0.00 r
+  REG2/alu_src_reg_out_reg/Q (DFFX1_LVT)                  0.11       0.11 r
+  REG2/alu_src_reg_out (msrv32_reg_block_2)               0.00       0.11 r
+  WBMUX/alu_source_reg_in (msrv32_wb_mux_sel_unit)        0.00       0.11 r
+  WBMUX/U13/Y (NBUFFX4_LVT)                               0.05 *     0.16 r
+  WBMUX/U15/Y (INVX1_LVT)                                 0.04 *     0.20 f
+  WBMUX/U221/Y (AO22X1_LVT)                               0.05 *     0.24 f
+  WBMUX/alu_2nd_src_mux_out[1] (msrv32_wb_mux_sel_unit)
+                                                          0.00       0.24 f
+  U10/Y (NBUFFX4_LVT)                                     0.04 *     0.28 f
+  ALU/op_2_in[1] (msrv32_alu)                             0.00       0.28 f
+  ALU/U277/Y (NBUFFX4_LVT)                                0.05 *     0.33 f
+  ALU/U297/Y (INVX1_LVT)                                  0.05 *     0.38 r
+  ALU/U79/Y (NAND2X0_LVT)                                 0.06 *     0.45 f
+  ALU/U80/Y (AO22X1_LVT)                                  0.08 *     0.52 f
+  ALU/U83/Y (OR3X1_LVT)                                   0.05 *     0.57 f
+  ALU/U84/Y (INVX1_LVT)                                   0.02 *     0.59 r
+  ALU/U85/Y (AO21X1_LVT)                                  0.04 *     0.63 r
+  ALU/U86/Y (AO222X1_LVT)                                 0.10 *     0.73 r
+  ALU/U156/Y (AO222X1_LVT)                                0.10 *     0.83 r
+  ALU/U390/Y (AO222X1_LVT)                                0.10 *     0.93 r
+  ALU/U391/Y (AO222X1_LVT)                                0.10 *     1.03 r
+  ALU/U392/Y (AO222X1_LVT)                                0.10 *     1.13 r
+  ALU/U393/Y (AO222X1_LVT)                                0.10 *     1.23 r
+  ALU/U394/Y (AO222X1_LVT)                                0.10 *     1.33 r
+  ALU/U395/Y (AO222X1_LVT)                                0.10 *     1.43 r
+  ALU/U396/Y (AO222X1_LVT)                                0.10 *     1.53 r
+  ALU/U397/Y (AO222X1_LVT)                                0.10 *     1.63 r
+  ALU/U398/Y (AO222X1_LVT)                                0.10 *     1.73 r
+  ALU/U399/Y (AO222X1_LVT)                                0.10 *     1.83 r
+  ALU/U400/Y (AO222X1_LVT)                                0.10 *     1.93 r
+  ALU/U401/Y (AO222X1_LVT)                                0.10 *     2.03 r
+  ALU/U427/Y (AO222X1_LVT)                                0.10 *     2.13 r
+  ALU/U458/Y (AO222X1_LVT)                                0.10 *     2.23 r
+  ALU/U483/Y (AO222X1_LVT)                                0.10 *     2.33 r
+  ALU/U508/Y (AO222X1_LVT)                                0.10 *     2.43 r
+  ALU/U509/Y (AO222X1_LVT)                                0.10 *     2.52 r
+  ALU/U510/Y (AO222X1_LVT)                                0.10 *     2.62 r
+  ALU/U772/Y (AO222X1_LVT)                                0.10 *     2.72 r
+  ALU/U773/Y (AO222X1_LVT)                                0.10 *     2.82 r
+  ALU/U774/Y (AO222X1_LVT)                                0.10 *     2.92 r
+  ALU/U775/Y (AO222X1_LVT)                                0.10 *     3.02 r
+  ALU/U776/Y (AO222X1_LVT)                                0.10 *     3.12 r
+  ALU/U777/Y (AO222X1_LVT)                                0.10 *     3.22 r
+  ALU/U778/Y (AO222X1_LVT)                                0.10 *     3.32 r
+  ALU/U779/Y (AO222X1_LVT)                                0.10 *     3.41 r
+  ALU/U806/Y (AO222X1_LVT)                                0.09 *     3.50 r
+  ALU/U807/S (FADDX1_LVT)                                 0.10 *     3.61 f
+  ALU/U808/Y (OA22X1_LVT)                                 0.05 *     3.65 f
+  ALU/U810/Y (NAND3X0_LVT)                                0.03 *     3.68 r
+  ALU/U813/Y (AO21X1_LVT)                                 0.05 *     3.74 r
+  ALU/U814/Y (AO21X1_LVT)                                 0.03 *     3.77 r
+  ALU/U815/Y (AO221X1_LVT)                                0.06 *     3.83 r
+  ALU/result_out[31] (msrv32_alu)                         0.00       3.83 r
+  WBMUX/alu_result_in[31] (msrv32_wb_mux_sel_unit)        0.00       3.83 r
+  WBMUX/U145/Y (AO22X1_LVT)                               0.05 *     3.88 r
+  WBMUX/U146/Y (OR3X2_LVT)                                0.06 *     3.95 r
+  WBMUX/wb_mux_out[31] (msrv32_wb_mux_sel_unit)           0.00       3.95 r
+  U26/Y (NBUFFX4_LVT)                                     0.08 *     4.02 r
+  IRF/rd_in[31] (msrv32_integer_file)                     0.00       4.02 r
+  IRF/U2105/Y (AO22X1_LVT)                                0.08 *     4.10 r
+  IRF/rs_1_out[31] (msrv32_integer_file)                  0.00       4.10 r
+  BU/rs1_in[31] (msrv32_bu)                               0.00       4.10 r
+  BU/U49/Y (INVX1_LVT)                                    0.02 *     4.12 f
+  BU/U51/Y (NAND2X0_LVT)                                  0.05 *     4.17 r
+  BU/U56/Y (NAND4X0_LVT)                                  0.04 *     4.21 f
+  BU/U64/Y (NOR4X1_LVT)                                   0.09 *     4.29 r
+  BU/U68/Y (NAND4X0_LVT)                                  0.04 *     4.33 f
+  BU/U124/Y (NOR4X1_LVT)                                  0.09 *     4.42 r
+  BU/U125/SO (HADDX1_LVT)                                 0.07 *     4.49 f
+  BU/U168/Y (OA222X1_LVT)                                 0.07 *     4.56 f
+  BU/U169/Y (NAND2X0_LVT)                                 0.04 *     4.60 r
+  BU/U170/Y (NAND3X0_LVT)                                 0.08 *     4.68 f
+  BU/branch_taken_out (msrv32_bu)                         0.00       4.68 f
+  PC/branch_taken_in (msrv32_pc)                          0.00       4.68 f
+  PC/U3/Y (AND2X1_LVT)                                    0.08 *     4.76 f
+  PC/misaligned_instr_out (msrv32_pc)                     0.00       4.76 f
+  MC/misaligned_instr_in (msrv32_machine_control)         0.00       4.76 f
+  MC/U38/Y (NOR3X0_LVT)                                   0.08 *     4.84 r
+  MC/U43/Y (NAND2X0_LVT)                                  0.03 *     4.87 f
+  MC/U46/Y (OA21X1_LVT)                                   0.05 *     4.92 f
+  MC/U50/Y (NAND4X0_LVT)                                  0.05 *     4.97 r
+  MC/U51/Y (INVX1_LVT)                                    0.03 *     5.00 f
+  MC/U52/Y (MUX21X1_LVT)                                  0.07 *     5.08 f
+  MC/cause_out_reg[3]/D (DFFX1_LVT)                       0.00 *     5.08 f
+  data arrival time                                                  5.08
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             0.00      10.00
+  MC/cause_out_reg[3]/CLK (DFFX1_LVT)                     0.00      10.00 r
+  library setup time                                     -0.04       9.96
+  data required time                                                 9.96
+  --------------------------------------------------------------------------
+  data required time                                                 9.96
+  data arrival time                                                 -5.08
+  --------------------------------------------------------------------------
+  slack (MET)                                                        4.89
+
+
+1

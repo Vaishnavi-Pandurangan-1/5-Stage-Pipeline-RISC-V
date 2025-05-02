@@ -1,0 +1,413 @@
+ 
+                              Library Manager (TM)
+
+                Version V-2023.12-SP4 for linux64 - Jun 03, 2024
+                           Base build date 2024/05/13
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Information: Term was not able to be set up using xterm-256color . Using "xterm" by default instead. (CLE-10)
+create_workspace -technology /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/tech/saed32nm_1p9m.tf -flow normal msrv32_alu
+Information: Loading technology file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ref/tech/saed32nm_1p9m.tf' (FILE-007)
+... created workspace msrv32_alu
+read_gds /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_no_clk/output/riscv_MACRO_no_clk_alu.gds
+Running read_gds
+        Command Options:
+                Library Name                            None
+                Layer Map                               None
+                Block Map                               None
+                Merge Action                            add
+                Keep Text Boxes                         No
+                Trace Connectivity Option               Auto
+                Trace Connectivity Limit                None
+                Net Property                            None
+                Cell Property                           None
+                Pin Property                            None
+                Via Property                            None
+                ASCII File                              None
+                Verbose                                 No
+                Centerline Boundary                     Disabled
+                Mask Fixed                              False
+                Layer Map Format                        ICC2
+                Files Read                              /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_no_clk/output/riscv_MACRO_no_clk_alu.gds
+
+        Application Settings:
+                file.gds.create_custom_via              false
+                file.gds.exclude_layers                 none
+                file.gds.port_type_map                  none
+                file.gds.text_layer_map                 none
+                file.gds.trace_unmapped_text            false
+                file.gds.trace_terminal_text                    none
+                file.gds.trace_terminal_length_4x_width                 none
+                file.gds.trace_terminal_length_exclude_list                     none
+                file.gds.trace_terminal_length_layer_pairs                      none
+                file.gds.trace_terminal_length          0.000000
+                file.gds.trace_terminal_type            unset
+                file.gds.trace_terminal_length_layers                   none
+                file.gds.trace_copy_overlap_shape_from_sub_cell         false
+                file.gds.trace_net_after_flattening             false
+                file.gds.trace_terminal_length_boundary_only            false
+                file.gds.trace_merge_overlap_mask               false
+                file.gds.use_only_mapped_text           false
+
+-------------------------------------------------------------
+
+Information: Loading GDS file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/MACRO_no_clk/output/riscv_MACRO_no_clk_alu.gds' (FILE-007)
+Information: Translating structure 'msrv32_alu' as cell 'riscv_MACRO_no_clk_alu_block/msrv32_alu'. (GDS-050)
+Information: Translating structure '$$VIA67LG_C_1860_1860_2_1_0' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA67LG_C_1860_1860_2_1_0'. (GDS-050)
+Information: Translating structure '$$VIA12SQ_C_1200_1200_1_2_0' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA12SQ_C_1200_1200_1_2_0'. (GDS-050)
+Information: Translating structure '$$VIA67LG_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA67LG_C'. (GDS-050)
+Information: Translating structure '$$VIA23LG_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA23LG_C'. (GDS-050)
+Information: Translating structure '$$VIA34LG_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA34LG_C'. (GDS-050)
+Information: Translating structure '$$VIA45LG_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA45LG_C'. (GDS-050)
+Information: Translating structure '$$VIA56LG_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA56LG_C'. (GDS-050)
+Information: Translating structure '$$VIA12BAR_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA12BAR_C'. (GDS-050)
+Information: Translating structure '$$VIA12SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA12SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA23SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA23SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA34SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA34SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA45SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA45SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA56SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA56SQ_C'. (GDS-050)
+Information: Translating structure '$$VIA67SQ_C' as cell 'riscv_MACRO_no_clk_alu_block/$$VIA67SQ_C'. (GDS-050)
+Information: Read GDSII into a new library 'riscv_MACRO_no_clk_alu_block'. (GDS-021)
+
+-------------------------------------------------------------
+
+Cell Statistics
+              Rectangles        Polygons           Paths      Cut Shapes          Arrays            Text       Instances        Cell Name
+                     116               0           10013               0               0             102           10271        msrv32_alu
+                       2               0               0               2               0               0               0        $$VIA67LG_C_1860_1860_2_1_0
+                       2               0               0               2               0               0               0        $$VIA12SQ_C_1200_1200_1_2_0
+                       2               0               0               1               0               0               0        $$VIA67LG_C
+                       2               0               0               1               0               0               0        $$VIA23LG_C
+                       2               0               0               1               0               0               0        $$VIA34LG_C
+                       2               0               0               1               0               0               0        $$VIA45LG_C
+                       2               0               0               1               0               0               0        $$VIA56LG_C
+                       2               0               0               1               0               0               0        $$VIA12BAR_C
+                       2               0               0               1               0               0               0        $$VIA12SQ_C
+                       2               0               0               1               0               0               0        $$VIA23SQ_C
+                       2               0               0               1               0               0               0        $$VIA34SQ_C
+                       2               0               0               1               0               0               0        $$VIA45SQ_C
+                       2               0               0               1               0               0               0        $$VIA56SQ_C
+                       2               0               0               1               0               0               0        $$VIA67SQ_C
+
+Layer Statistics
+            Layer Number        Datatype        Polygons      Cut Shapes           Paths      Rectangles            Text
+                      11               0               0               0            1028               3               0
+                      12               0               0               4               0               0               0
+                      13               0               0               0            5386               5               0
+                      14               0               0               2               0               0               0
+                      15               0               0               0            2800               4               0
+                      16               0               0               2               0               0               0
+                      17               0               0               0             518              61              57
+                      18               0               0               2               0               0               0
+                      19               0               0               0             201              47              43
+                      20               0               0               2               0               0               0
+                      21               0               0               0              47              13               0
+                      22               0               0               4               0               0               0
+                      23               0               0               0              33              11               2
+
+Object Summary
+        Instances                                  10271
+        Cut Shapes                                    16
+        Arrays                                         0
+        Polygons                                       0
+        Paths                                      10013
+        Rectangles                                   144
+        Text                                         102
+        Cells                                         15
+        Skipped Zero-Area Polygons                     0
+
+-------------------------------------------------------------
+Warning: Library riscv_MACRO_no_clk_alu_block has no reference libraries. (LNK-063)
+Using libraries: riscv_MACRO_no_clk_alu_block
+Visiting block riscv_MACRO_no_clk_alu_block:msrv32_alu.design
+Linking block riscv_MACRO_no_clk_alu_block:AO22X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND2X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO21X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:MUX41X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND2X0_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND3X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:MUX41X1_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NBUFFX4_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX0_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AOI22X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO221X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX0_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND4X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OR2X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND2X0_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:HADDX1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND3X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND3X0_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:HADDX2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OR3X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO222X1_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND4X0_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OA222X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OA221X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OA22X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO222X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OA21X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO21X1_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OAI22X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AOI22X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OAI222X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:FADDX1_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AO221X1_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND4X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND2X1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND2X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND3X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NOR2X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NAND2X2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:OR2X4_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX2_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX4_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX8_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:NBUFFX8_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:INVX1_HVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AND3X4_RVT.design
+Linking block riscv_MACRO_no_clk_alu_block:AOI21X1_HVT.design
+Expanding block riscv_MACRO_no_clk_alu_block:msrv32_alu.design
+Design 'msrv32_alu' was successfully linked.
+Warning: The Application option "file.gds.port_type_map" is notdefined before "read_gds" command. (GDS-022)
+{riscv_MACRO_no_clk_alu_block}
+set_attribute [get_lib_cells msrv32_alu] design_type macro
+{riscv_MACRO_no_clk_alu_block/msrv32_alu/design}
+check_workspace
+Information: The command 'check_workspace' cleared the undo history. (UNDO-016)
+Checking libraries...
+Information: Copied 1 physical design (LM-050)
+Warning:  Direction for port op_1_in[31] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[30] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[29] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[28] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[27] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[26] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[25] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[24] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[23] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[22] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[21] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[20] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[19] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[18] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[17] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[16] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[15] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[14] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[13] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[12] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[11] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[10] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[9] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[8] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[7] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[6] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[5] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[4] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[3] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[2] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[1] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_1_in[0] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[31] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[30] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[29] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[28] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[27] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[26] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[25] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[24] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[23] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[22] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[21] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[20] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[19] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[18] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[17] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[16] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[15] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[14] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[13] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[12] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[11] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[10] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[9] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[8] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[7] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[6] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[5] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[4] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[3] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[2] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[1] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port op_2_in[0] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_in[3] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_in[2] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_in[1] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port opcode_in[0] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[31] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[30] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[29] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[28] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[27] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[26] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[25] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[24] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[23] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[22] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[21] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[20] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[19] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[18] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[17] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[16] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[15] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[14] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[13] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[12] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[11] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[10] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[9] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[8] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[7] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[6] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[5] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[4] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[3] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[2] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[1] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port result_out[0] on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port VDD on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+Warning:  Direction for port VSS on msrv32_alu/msrv32_alu/design is changed from unknown to in (LM-055)
+... creating frames for msrv32_alu
+Information: Block msrv32_alu.frame, the feature of blocking core area is set on specific layers. New zero-spacing routing blockages and RC metal are added on layers: M1 M2 M3 M4 M5 M6 M7. (FRAM-045)
+Information: Block msrv32_alu.frame, the feature of blockage trimming by pin is set to 'touch' on specific layers. All metal shapes and routing blockages touch pins in design view are trimmed on layers: PO M1 M2 M3 M4 M5 M6 M7 M8 M9 MRDL NWELL. (FRAM-046)
+... created 1 frames
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[31]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[30]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[29]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[28]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[27]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[26]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[25]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[24]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[23]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[22]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[21]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[20]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[19]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[18]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[17]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[16]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[15]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[14]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[13]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[12]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[11]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[10]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[9]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[8]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[7]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[6]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[5]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_1_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[31]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[30]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[29]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[28]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[27]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[26]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[25]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[24]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[23]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[22]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[21]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[20]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[19]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[18]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[17]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[16]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[15]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[14]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[13]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[12]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[11]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[10]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[9]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[8]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[7]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[6]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[5]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/op_2_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/opcode_in[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/opcode_in[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/opcode_in[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/opcode_in[0]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[31]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[30]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[29]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[28]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[27]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[26]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[25]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[24]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[23]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[22]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[21]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[20]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[19]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[18]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[17]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[16]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[15]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[14]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[13]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[12]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[11]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[10]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[9]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[8]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[7]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[6]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[5]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[4]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[3]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[2]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[1]. (LM-095)
+Warning: Bus property only exist in frame view msrv32_alu/result_out[0]. (LM-095)
+
+Workspace check succeeded!
+commit_workspace -output msrv32_alu.ndm
+... wrote msrv32_alu.ndm
+... removing library 'riscv_MACRO_no_clk_alu_block'
+... lib workspace removed!
+open_lib ./msrv32_alu.ndm
+Information: Loading library file '/home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/LM/RISCV_Macro_no_clk/msrv32_alu.ndm' (FILE-007)
+Information: Library is effectively read-only. (LMUI-027)
+{msrv32_alu}
+lm_shell> change_selection [get_lib_cells -include_subcells {msrv32_alu/msrv32_alu/frame}]
+lm_shell> current_block msrv32_alu:msrv32_alu.frame
+lm_shell> 

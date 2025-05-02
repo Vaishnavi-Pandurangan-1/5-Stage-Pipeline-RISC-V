@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : area
+Design : msrv32_top
+Version: T-2022.03-SP4
+Date   : Thu Apr 24 11:28:14 2025
+****************************************
+
+Information: Updating design information... (UID-85)
+Warning: Design 'msrv32_top' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Library(s) Used:
+
+    saed32lvt_ss0p95v125c (File: /home1/PD08/Vaishnavii/VLSI_PD/main_project_RISC_V/ref/DBs/saed32lvt_ss0p95v125c.db)
+
+Number of ports:                         4184
+Number of nets:                         12666
+Number of cells:                         8776
+Number of combinational cells:           7037
+Number of sequential cells:              1705
+Number of macros/black boxes:               0
+Number of buf/inv:                       1133
+Number of references:                      19
+
+Combinational area:              16552.907106
+Buf/Inv area:                     2027.052554
+Noncombinational area:           11674.359032
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 28227.266138
+Total area:                 undefined
+1

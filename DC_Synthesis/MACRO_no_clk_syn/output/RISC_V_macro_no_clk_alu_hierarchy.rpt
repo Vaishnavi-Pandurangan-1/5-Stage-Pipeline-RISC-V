@@ -1,0 +1,50 @@
+ 
+****************************************
+Report : hierarchy
+Design : msrv32_alu
+Version: T-2022.03-SP4
+Date   : Wed Apr 23 21:57:11 2025
+****************************************
+
+Attributes:
+    r - licensed design
+
+msrv32_alu         r
+    AND2X1_LVT           saed32lvt_ss0p95v125c
+    AND2X2_LVT           saed32lvt_ss0p95v125c
+    AND3X1_LVT           saed32lvt_ss0p95v125c
+    AND3X2_LVT           saed32lvt_ss0p95v125c
+    AND3X4_LVT           saed32lvt_ss0p95v125c
+    AND4X1_LVT           saed32lvt_ss0p95v125c
+    AO21X1_LVT           saed32lvt_ss0p95v125c
+    AO22X1_LVT           saed32lvt_ss0p95v125c
+    AO221X1_LVT          saed32lvt_ss0p95v125c
+    AO222X1_LVT          saed32lvt_ss0p95v125c
+    AO222X2_LVT          saed32lvt_ss0p95v125c
+    AOI21X1_LVT          saed32lvt_ss0p95v125c
+    AOI22X1_LVT          saed32lvt_ss0p95v125c
+    FADDX1_LVT           saed32lvt_ss0p95v125c
+    HADDX1_LVT           saed32lvt_ss0p95v125c
+    INVX1_LVT            saed32lvt_ss0p95v125c
+    INVX2_LVT            saed32lvt_ss0p95v125c
+    INVX4_LVT            saed32lvt_ss0p95v125c
+    INVX8_LVT            saed32lvt_ss0p95v125c
+    MUX41X1_LVT          saed32lvt_ss0p95v125c
+    MUX41X2_LVT          saed32lvt_ss0p95v125c
+    NAND2X0_LVT          saed32lvt_ss0p95v125c
+    NAND2X2_LVT          saed32lvt_ss0p95v125c
+    NAND2X4_LVT          saed32lvt_ss0p95v125c
+    NAND3X0_LVT          saed32lvt_ss0p95v125c
+    NAND4X0_LVT          saed32lvt_ss0p95v125c
+    NBUFFX4_LVT          saed32lvt_ss0p95v125c
+    NOR2X2_LVT           saed32lvt_ss0p95v125c
+    OA21X1_LVT           saed32lvt_ss0p95v125c
+    OA22X1_LVT           saed32lvt_ss0p95v125c
+    OA221X1_LVT          saed32lvt_ss0p95v125c
+    OA222X1_LVT          saed32lvt_ss0p95v125c
+    OAI22X1_LVT          saed32lvt_ss0p95v125c
+    OAI222X1_LVT         saed32lvt_ss0p95v125c
+    OR2X1_LVT            saed32lvt_ss0p95v125c
+    OR2X4_LVT            saed32lvt_ss0p95v125c
+    OR3X1_LVT            saed32lvt_ss0p95v125c
+1

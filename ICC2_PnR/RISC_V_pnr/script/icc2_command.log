@@ -1,0 +1,2221 @@
+#@ # 
+#@ # Running icc2_shell Version T-2022.03-SP4 for linux64 -- Aug 31, 2022
+#@ # Date:   Thu Apr 10 09:06:47 2025
+#@ # Run by: Vaishnavii@mavenserver-RH2
+#@ 
+
+gui_set_pref_value -category {SelectByNamePalette} -key {ObjectType} -value {Logical Cells}
+open_lib /home1/PD08/Vaishnavii/VLSI_PD/main_project_RISC_V/PNR/work/riscv_block_10 -edit
+open_block /home1/PD08/Vaishnavii/VLSI_PD/main_project_RISC_V/PNR/work/riscv_block_10:riscv_pns.design
+link_block
+win_set_filter -visible -class cell -filter {clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -visible -class pseudo_bump -filter {deleted}
+win_set_filter -visible -class pseudo_tsv -filter {deleted}
+win_set_filter -visible -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_filter -expand_cell_types {soft_macro  }
+win_set_select_class -visible {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell placement_blockage }
+win_set_filter -class cell -filter {array clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -class pseudo_bump -filter {deleted}
+win_set_filter -class pseudo_tsv -filter {deleted}
+win_set_filter -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_select_class {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via placement_blockage }
+win_select_objects -slct_targets global -at {110.702 67.882} -radius 0.4716
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.7} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 14} {offset: 3} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.7} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 3.7} {offset: 3} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.7} {pitch: 10} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 3.7} {offset: 3} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.7} {pitch: 10} {offset: 5} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 3.7} {offset: 3} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.7} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 3.7} {offset: 3} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 1} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.7} {pitch: 3.7} {offset: 2} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 1} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 1.2} {pitch: 3.7} {offset: 2} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.2} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.2} {pitch: 3.7} {offset: 2} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.09} {pitch: 3.7} {offset: 2} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.2} {pitch: 3.7} {offset: 2} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 3} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 3} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.5} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.5} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.3} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.3} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -full
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_zoom -window [gui_get_current_window -view] -full
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.8} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.8} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+gui_zoom -window [gui_get_current_window -view] -full
+
+# LOWER MESH CREATION (M8 & M9)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+compile_pg -strategies M2_mesh
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+reate_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+compile_pg -strategies M8M9_mesh
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} 
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+place_pins -self
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+compile_pg -strategies M2_mesh
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+win_select_objects -slct_targets global -at {18.513 100.511} -radius 0.2195
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -drag {{17.416 99.853} {14.562 98.316}} -scale 0.2195
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {14.562 98.316} -scale 0.2195
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+undo
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+win_select_objects -slct_targets global -at {18.376 110.636} -radius 0.0274
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {18.184 110.992} -scale 0.0549
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {13.300 111.596} -scale 0.0549
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_zoom -window [gui_get_current_window -view] -full
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+win_select_objects -slct_targets global -at {203.112 130.802} -radius 0.2195
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {202.673 116.315} -scale 0.2195
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {24.769 118.401} -scale 0.1097
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+undo
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+compile_pg -strategies M8M9_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+win_select_objects -slct_targets global -at {18.513 115.657} -radius 0.1097
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {18.404 110.499} -scale 0.1097
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {13.794 110.938} -scale 0.1097
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+undo
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+compile_pg -strategies M8M9_mesh
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 10} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+shape_blocks
+create_placement -floorplan 
+create_placement -floorplan
+place_pins -self
+legalize_placement
+check_pg_connectivity 
+check_pg_drc 
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.3} {pitch: 10} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+#####################################################################
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+check_pg_connectivity
+check_pg_drc 
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 14} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+check_pg_connectivity
+check_pg_drc 
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+source -echo ../script/riscv_PNS.tcl
+
+# Check PNS Validations
+check_pg_connectivity 
+check_pg_drc 
+check_pg_missing_vias 
+
+-----------------------------------------------------------------------------------
+
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 20} {offset: 14}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+###################################
+create_placement -floorplan 
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 20} {offset: 14}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+##############################
+shape_blocks
+create_placement -floorplan 
+legalize_placement 
+check_pg_connectivity 
+check_pg_drc 
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 20} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+############################
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+legalize_placement
+check_pg_connectivity 
+check_pg_drc
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 18} {offset: 6} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 20} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 18} {offset: 6} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 20} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+check_pg_connectivity
+check_pg_drc
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.6} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+shape_blocks
+create_placement -floorplan 
+legalize_placement 
+check_pg_connectivity 
+check_pg_drc
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+win_select_objects -slct_targets global -at {155.751 125.301} -radius 0.1023
+gui_zoom -window [gui_get_current_window -view] -full
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.3f} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -full
+check_pg_connectivity 
+shape_blocks
+create_placement -floorplan 
+legalize_placement 
+check_pg_connectivity 
+check_pg_drc
+check_pg_missing_vias
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.3} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+#####################################################################
+shape_blocks
+create_placement -floorplan 
+legalize_placement 
+check_pg_connectivity 
+check_pg_drc
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+gui_zoom -window [gui_get_current_window -view] -full
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 10} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+############################
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+gui_zoom -window [gui_get_current_window -view] -full
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+gui_show_error_data
+gui_set_error_browser_option -show_mode all
+gui_set_error_browser_option -view_mode zoom
+gui_set_error_browser_option -zoom_factor 1.000000
+gui_set_error_browser_option -grouping type
+gui_error_browser -show
+gui_error_browser -hide
+check_pg_connectivity
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {riscv_pns_floatingPG.err}
+gui_set_current_errors -data_name {riscv_pns_floatingPG.err} -group {Floating wire violation} -sub_group {M1 (11)}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_floatingPG.err} -id {1118}] -force
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+win_select_objects -slct_targets global -at {123.346 88.824} -radius 0.0388
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_zoom -window [gui_get_current_window -types Layout -mru] -factor 2 -at_point {110.496 89.242}
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_floatingPG.err} -id {1119}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_floatingPG.err} -id {1120}] -force
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_set_layout_layer_visibility -toggle [get_layers -filter {mask_name == metal6} -quiet]
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+win_set_filter -visible -class routing_blockage -layer {19}
+win_set_filter -visible -class shape -filter {} -layer {19}
+win_set_filter -visible -class via -filter {} -layer {19}
+win_set_filter -visible -class terminal -filter {}  -layer {19}
+win_set_filter -class routing_blockage -layer {19}
+win_set_filter -class shape -filter {} -layer {19}
+win_set_filter -class via -filter {} -layer {19}
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_scroll -window [gui_get_current_window -view] -vrel .2
+gui_zoom -window [gui_get_current_window -view] -full
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_error_browser -hide
+gui_clear_selected_errors
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+gui_zoom -window [gui_get_current_window -view] -full
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+################
+shape_blocks
+create_placement -floorplan 
+legalize_placement
+check_pg_connectivity
+initialize_floorplan -control_type die -side_ratio {2.5 2.5} -core_offset {8.5} -core_utilization {0.7} -orientation N
+####################### PNS SCRIPT ##################################
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}
+
+compile_pg -strategies M1_rails
+
+###########
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_set_current_errors -data_name {riscv_pns_missingVia.err} -group {default} -sub_group {VIA1 (12)}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {0}] -force
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showPin -value true
+win_set_filter -visible -class pin -filter {} -layer {19}
+win_set_select_class -visible {cell pin port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell placement_blockage }
+win_set_filter -class pin -filter {} -layer {19}
+win_set_select_class {cell pin port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via placement_blockage }
+win_select_objects -slct_targets global -at {186.532 58.641} -radius 0.0002
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {xPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {yPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {master} -value {VIA12SQ_C}
+gui_set_mouse_tool_option -tool CreateViaTool -option {master} -value {VIA12BAR}
+gui_set_mouse_tool_option -tool CreateViaTool -option {xPitch} -value {0.136}
+gui_set_mouse_tool_option -tool CreateViaTool -option {yPitch} -value {0.186}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_change_error_highlight -color blue -selected -add
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {xPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {yPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {master} -value {VIA12SQ_C}
+gui_set_mouse_tool_option -tool CreateViaTool -option {auto} -value {true}
+gui_set_mouse_tool_option -tool CreateViaTool -option {auto} -value {false}
+gui_set_mouse_tool_option -tool CreateViaTool -option {master} -value {VIA23BAR}
+gui_set_mouse_tool_option -tool CreateViaTool -option {xPitch} -value {0.136}
+gui_set_mouse_tool_option -tool CreateViaTool -option {yPitch} -value {0.186}
+gui_set_mouse_tool_option -tool CreateViaTool -option {auto} -value {true}
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {186.492 58.662} -scale 0.0002
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showPinShapeLayer_M1 -value true
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showPinShapeLayer_VIA1 -value true
+gui_set_setting -window [gui_get_current_window -types Layout -mru] -setting showPinShapeLayer_M2 -value true
+check_pg_missing_vias
+gui_error_browser -hide
+gui_show_error_data
+gui_error_browser -show
+gui_error_browser -hide
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_set_current_errors -data_name {riscv_pns_missingVia.err} -group {default} -sub_group {VIA1 (12)}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {0}] -force
+gui_change_error_highlight -color blue -selected -add
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {186.498 142.260} -scale 0.0003
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+win_select_objects -slct_targets global -at {186.508 142.245} -radius 0.0003
+win_select_objects -slct_targets global -at {186.511 142.235} -radius 0.0003
+change_selection 
+win_select_objects -slct_targets global -at {186.506 142.248} -radius 0.0003
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {1}] -force
+gui_change_error_highlight -color blue -selected -add
+win_select_objects -slct_targets global -at {162.503 58.664} -radius 0.0002
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {xPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {yPitch} -value {0.120}
+gui_set_mouse_tool_option -tool CreateViaTool -option {master} -value {VIA12SQ_C}
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {162.501 58.660} -scale 0.0002
+gui_zoom -window [gui_get_current_window -view] -factor 0.5
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+check_pg_missing_vias
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_set_current_errors -data_name {riscv_pns_missingVia.err} -group {default}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {0}] -force
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_set_current_errors -data_name {riscv_pns_missingVia.err} -group {default} -sub_group {VIA1 (12)}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {0}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {5}] -force
+gui_change_error_highlight -color blue -selected -add
+win_select_objects -slct_targets global -at {66.505 58.654} -radius 0.0002
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {66.505 58.654} -scale 0.0002
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {6}] -force
+gui_change_error_highlight -color blue -selected -add
+win_select_objects -slct_targets global -at {66.512 142.257} -radius 0.0002
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {66.512 142.257} -scale 0.0002
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {8}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {7}] -force
+gui_change_error_highlight -color blue -selected -add
+gui_set_mouse_tool_option -tool SELECT -option {Operation} -value {Replace}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start CreateViaTool
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VDD}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {42.520 58.665} -scale 0.0002
+check_pg_missing_vias
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_set_current_errors -data_name {riscv_pns_missingVia.err} -group {default}
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {0}] -force
+gui_set_selected_errors -replace [gui_get_errors -data_name {riscv_pns_missingVia.err} -id {30}] -force
+gui_set_error_status -status fixed -errors  [gui_get_errors -selected]
+gui_set_error_status -status error -errors  [gui_get_errors -selected]
+gui_change_error_highlight -color blue -selected -add
+gui_set_mouse_tool_option -tool CreateViaTool -option {net} -value {VSS}
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {18.654 177.373} -scale 0.0002
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_set_error_status -status fixed -errors  [gui_get_errors -selected]
+check_pg_missing_vias
+check_pg_drc
+win_select_objects -slct_targets global -at {18.715 177.358} -radius 0.0002
+gui_zoom -window [gui_get_current_window -view] -full
+gui_clear_selected_errors
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 8}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+check_pg_connectivity 
+check_pg_drc
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 14} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 27} {offset: 8}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+gui_zoom -window [gui_get_current_window -view] -full
+check_pg_connectivity
+check_pg_drc
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 8}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+
+#############################
+check_pg_connectivity
+check_pg_drc
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+
+################################
+check_pg_connectivity 
+check_pg_drc
+check_pg_missing_vias
+gui_open_error_data -name {riscv_pns_missingVia.err}
+gui_error_browser -hide
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 17} {offset: 10} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 17} {offset: 10} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 20} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+
+#########################
+check_pg_connectivity
+check_pg_drc 
+check_pg_missing_vias
+gui_show_error_data
+gui_error_browser -show
+gui_open_error_data -name {riscv_pns_missingVia.err}
+remove_pg_strategies -all
+remove_pg_patterns -all
+remove_pg_regions -all
+remove_pg_via_master_rules -all
+remove_pg_strategy_via_rules -all
+remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect > /dev/null
+
+connect_pg_net
+
+##########################################################################
+# Horizonal metal layers: M1,M9
+# Vertical Metal layers: M2,M8
+
+# RING CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+
+create_pg_ring_pattern ring_pattern -horizontal_layer M9 -horizontal_width {1.7} -horizontal_spacing {1.7} \
+				    -vertical_layer M8 -vertical_width {1.7} -vertical_spacing {1.7} -corner_bridge true \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+set_pg_strategy core_ring -pattern {{name: ring_pattern} {nets: {VDD VSS}} {offset: {2.5 2}}} -core \
+		     -extension {stop: design_boundary_and_generate_pin}
+
+compile_pg -strategies core_ring
+
+
+# MESH CREATION (M8 & M9)
+# M8 (min width = 0.056; max width = 5; min_spacing = 0.056)
+# M9 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{{vertical_layer: M8} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}} {{horizontal_layer: M9} {width: 0.6} {pitch: 17} {offset: 8} {spacing: interleaving}}} \
+				    -via_rule { {intersection: adjacent} {via_master : default} }
+
+
+set_pg_strategy M8M9_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		     -extension {stop: outermost_ring}
+
+compile_pg -strategies M8M9_mesh
+
+# LOWER MESH CREATION (M2)
+# M2 (min width = 0.056; max width = 5; min_spacing = 0.056)
+create_pg_mesh_pattern mesh_pattern -layers {{vertical_layer: M2} {width: 0.1} {pitch: 24} {offset: 10}} 
+
+
+set_pg_strategy M2_mesh -pattern {{name: mesh_pattern} {nets: VDD VSS}} -core \
+		    -extension {stop: outermost_ring}
+
+
+compile_pg -strategies M2_mesh
+
+# RAIL CREATION (M1)
+# M1 (min width = 0.05; max width = 5; min_spacing = 0.056)
+
+create_pg_std_cell_conn_pattern rail_pattern -layers M1
+set_pg_strategy M1_rails -core -pattern {{name: rail_pattern}{nets: VDD VSS}}	
+
+	
+compile_pg -strategies M1_rails
+
+###########################
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+check_pg_drc
+check_pg_missing_vias
+save_block -as riscv_pns_validations_powerplanning
+save_block -as riscv_pns_power_planning
+save_block -as riscvpowerplanning
+check_pg_connectivity
+check_pg_drc
+check_pg_missing_vias
+check_pg_drc
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+win_select_objects -slct_targets global -at {90.680 106.083} -radius 0.0511
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+change_selection 
+win_select_objects -slct_targets global -at {90.463 108.019} -radius 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {90.310 107.994} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {88.266 108.096} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+win_select_objects -slct_targets global -at {114.630 108.014} -radius 0.0128
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {114.642 108.653} -scale 0.0128
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {115.293 108.538} -scale 0.0128
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+win_select_objects -slct_targets global -at {114.515 108.257} -radius 0.0128
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {114.464 108.040} -scale 0.0128
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {112.689 108.014} -scale 0.0128
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_zoom -window [gui_get_current_window -view] -factor 2.0
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+win_select_objects -slct_targets global -at {138.651 107.815} -radius 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {138.702 108.122} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {141.793 107.994} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+win_select_objects -slct_targets global -at {162.719 107.253} -radius 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {162.591 108.275} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {166.883 108.096} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel .2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+change_selection 
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+win_select_objects -slct_targets global -at {66.446 107.636} -radius 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {66.446 109.067} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {59.982 108.914} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {61.081 108.224} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+gui_scroll -window [gui_get_current_window -view] -hrel -.2
+win_select_objects -slct_targets global -at {18.719 107.866} -radius 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -start MoveTool
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {18.668 108.479} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {23.113 108.147} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -add_point {20.814 108.096} -scale 0.0255
+gui_mouse_tool -window [gui_get_current_window -types Layout -mru] -reset
+gui_zoom -window [gui_get_current_window -view] -full
+check_pg_connectivity
+check_pg_drc
+gui_error_browser -hide
+start_gui &
+close_blocks -force -purge riscv_pns
+open_block /home1/PD08/Vaishnavii/VLSI_PD/main_project_RISC_V/PNR/work/riscv_block_10:riscvpowerplanning.design

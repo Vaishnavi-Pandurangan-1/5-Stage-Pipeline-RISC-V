@@ -1,0 +1,94 @@
+#@ # 
+#@ # Running icc2_shell Version T-2022.03-SP4 for linux64 -- Aug 31, 2022
+#@ # Date:   Fri Apr 25 11:53:47 2025
+#@ # Run by: Vaishnavii@mavenserver-RH2
+#@ 
+
+gui_set_pref_value -category {SelectByNamePalette} -key {ObjectType} -value {Logical Cells}
+open_lib /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/RISC_V/work_pnr_RISCV/riscv_block -edit
+open_block /home1/PD08/Vaishnavii/VLSI_PD/Main_Project_RISC_V/ICC2_PnR/RISC_V/work_pnr_RISCV/riscv_block:clock_opt_not_done.design
+win_set_filter -visible -class cell -filter {clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -visible -class pseudo_bump -filter {deleted}
+win_set_filter -visible -class pseudo_tsv -filter {deleted}
+win_set_filter -visible -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_filter -expand_cell_types {soft_macro  }
+win_set_select_class -visible {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage block_shielding topology_node topology_edge topology_repeater annotation_shape core_area die_area edit_group shape via terminal fill_cell placement_blockage }
+win_set_filter -class cell -filter {array clock_margin hard_macro_margin hard_margin route_blockage_margin soft_margin}
+win_set_filter -class pseudo_bump -filter {deleted}
+win_set_filter -class pseudo_tsv -filter {deleted}
+win_set_filter -class placement_blockage -filter {wiring} -layer {0-82}
+win_set_select_class {cell port bound routing_blockage shaping_blockage pg_region bump_region pseudo_bump pseudo_tsv pin_blockage topology_node topology_edge topology_repeater annotation_shape edit_group shape via placement_blockage }
+link_block
+set_app_options -name time.remove_clock_reconvergence_pessimism -value true
+report_clock_settings
+report_qor -summary
+clock_opt
+reset_upf
+clock_opt
+set_routing_rule all -clear -default_rule -min_routing_layer 1 -max_routing_layer 9
+route_auto -max_detail_route_iterations 30
+route_eco
+check_lvs
+report_congestion
+report_timing
+gui_show_error_data
+gui_set_error_browser_option -show_mode all
+gui_set_error_browser_option -view_mode zoom
+gui_set_error_browser_option -zoom_factor 1.000000
+gui_set_error_browser_option -grouping type
+gui_error_browser -show
+gui_error_browser -hide
+change_selection [get_pins {REG2/pc_plus_4_reg_out_reg[30]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[30]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[30]/D}]
+change_selection -add [get_pins {REG2/pc_plus_4_reg_out_reg[30]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins PC/U13/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells PC/U13]
+size_cell PC/U13 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+size_cell PC/U13 -lib_cell saed32_lvt|saed32_lvt_std/NAND4X0_LVT
+update_timing
+change_selection [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins ALU/U388/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells ALU/U388]
+change_selection -add [get_pins ALU/U388/Y]
+size_cell ALU/U388 -lib_cell saed32_lvt|saed32_lvt_std/NAND2X0_LVT
+size_cell ALU/U388 -lib_cell saed32_lvt|saed32_lvt_std/NAND2X0_LVT
+update_timing
+change_selection [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+set {worst.endpts.default.clk.setup.paths} [::get_timing_paths -report_by design -delay_type max -path_type full_clock_expanded -to [get_selection] -max_paths 999999 -nworst 1 -slack_lesser_than 0 -include_hierarchical_pins -groups {clk} -scenarios {default}]
+change_selection [get_pins REG2/alu_src_reg_out_reg/Q]
+change_selection [get_pins ALU/U80/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+change_selection [get_cells ALU/U80]
+size_cell ALU/U80 -lib_cell saed32_rvt|saed32_rvt_std/AO22X1_RVT
+change_selection [get_pins ALU/U80/Y]
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schematic:background_color -value black
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting zoomFitFactor -value 0.0
+gui_set_setting -window [gui_get_current_window -types Schematic -mru] -setting schem_hierarchy:lineColor -value darkorange
+change_selection [get_cells ALU/U80]
+size_cell ALU/U80 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+size_cell ALU/U80 -lib_cell saed32_lvt|saed32_lvt_std/AO22X1_LVT
+update_timing
+update_timing -full
+change_selection [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+change_selection -add [get_pins {MC/curr_state_reg[1]/D}]
+save_block
