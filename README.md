@@ -6,7 +6,6 @@
   <h1 align="center">5-Stage-Pipeline-RISCV-Implimentation</h1>
 
   <p align="center">
-    <br />
     <a href="https://github.com/Vaishnavi-Pandurangan-1/5-Stage-Pipeline-RISC-V/tree/main/Documentations"><strong>Explore the docs »</strong></a>
     <br />
     <br />
